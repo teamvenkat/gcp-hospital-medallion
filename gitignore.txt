@@ -1,0 +1,36 @@
+# macOS system files
+.DS_Store
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+*.key
+*.pem
+
+# dbt generated files
+target/
+dbt_packages/
+logs/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+Thumbs.db
+
+# Log files
+*.log

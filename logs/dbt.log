@@ -39731,3 +39731,750 @@ ORDER BY
 [0m20:50:39.123288 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a1cbd40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115739f10>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1157396d0>]}
 [0m20:50:39.123383 [debug] [MainThread]: Flushing usage events
 [0m20:50:40.088492 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:43:38.684342 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10d3c6270>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10eb4efd0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10eb4f890>]}
+
+
+============================== 18:43:38.686881 | 57a4a1c0-369f-4f7e-84e5-bef2410b439a ==============================
+[0m18:43:38.686881 [info ] [MainThread]: Running with dbt=1.12.2
+[0m18:43:38.687089 [debug] [MainThread]: running dbt with arguments {'use_colors': 'True', 'fail_fast': 'False', 'indirect_selection': 'eager', 'send_anonymous_usage_stats': 'True', 'invocation_command': 'dbt parse', 'printer_width': '80', 'version_check': 'True', 'hints_enabled': 'True', 'no_print': 'None', 'profiles_dir': '/Users/venkatramireddy/.dbt', 'cache_selected_only': 'False', 'static_parser': 'True', 'warn_error': 'None', 'maximum_seed_size_mib': '1', 'use_experimental_parser': 'False', 'partial_parse': 'True', 'introspect': 'True', 'target_path': 'None', 'write_json': 'True', 'log_cache_events': 'False', 'log_format': 'default', 'quiet': 'False', 'log_path': '/Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/logs', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'empty': 'None', 'debug': 'False'}
+[0m18:43:39.284748 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '57a4a1c0-369f-4f7e-84e5-bef2410b439a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1195e4c30>]}
+[0m18:43:39.303880 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '57a4a1c0-369f-4f7e-84e5-bef2410b439a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1195df350>]}
+[0m18:43:39.304133 [info ] [MainThread]: Registered adapter: bigquery=1.12.0
+[0m18:43:39.360818 [debug] [MainThread]: checksum: 16f9029ec7e9acd3b0d26e75898593e961eaaa84a5179fd6abc1e5ceeafb08b1, vars: {}, profile: gcp_hospital_medallion, target: dev, version: 1.12.2
+[0m18:43:39.456277 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:43:39.456416 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m18:43:39.456496 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:43:39.459953 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '57a4a1c0-369f-4f7e-84e5-bef2410b439a', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119db5a50>]}
+[0m18:43:39.461247 [info ] [MainThread]: Performance info: /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/perf_info.json
+[0m18:43:39.543545 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/manifest.json
+[0m18:43:39.544876 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/semantic_manifest.json
+[0m18:43:39.553777 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/osi_document.json
+[0m18:43:39.555757 [debug] [MainThread]: Resource report: {"command_name": "parse", "command_success": true, "command_wall_clock_time": 0.92698956, "process_in_blocks": "0", "process_kernel_time": 0.225055, "process_mem_max_rss": "257736704", "process_out_blocks": "0", "process_user_time": 0.925785}
+[0m18:43:39.555973 [debug] [MainThread]: Command `dbt parse` succeeded at 18:43:39.555939 after 0.93 seconds
+[0m18:43:39.556104 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x119990050>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1197ebd40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10eb2b230>]}
+[0m18:43:39.556200 [debug] [MainThread]: Flushing usage events
+[0m18:43:40.797616 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m18:44:15.943968 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10900e270>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a812850>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x10a812ad0>]}
+
+
+============================== 18:44:15.945561 | 8573711f-ec68-479f-9420-c3cab8a5e3e4 ==============================
+[0m18:44:15.945561 [info ] [MainThread]: Running with dbt=1.12.2
+[0m18:44:15.945765 [debug] [MainThread]: running dbt with arguments {'cache_selected_only': 'False', 'indirect_selection': 'eager', 'write_json': 'True', 'static_parser': 'True', 'use_experimental_parser': 'False', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt build', 'no_print': 'None', 'introspect': 'True', 'log_cache_events': 'False', 'maximum_seed_size_mib': '1', 'log_format': 'default', 'printer_width': '80', 'warn_error': 'None', 'hints_enabled': 'True', 'fail_fast': 'False', 'use_colors': 'True', 'log_path': '/Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/logs', 'profiles_dir': '/Users/venkatramireddy/.dbt', 'debug': 'False', 'empty': 'False', 'version_check': 'True', 'quiet': 'False', 'send_anonymous_usage_stats': 'True', 'target_path': 'None', 'partial_parse': 'True'}
+[0m18:44:16.247423 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'project_id', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11517e650>]}
+[0m18:44:16.266426 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'adapter_info', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1099d79b0>]}
+[0m18:44:16.266677 [info ] [MainThread]: Registered adapter: bigquery=1.12.0
+[0m18:44:16.318830 [debug] [MainThread]: checksum: 16f9029ec7e9acd3b0d26e75898593e961eaaa84a5179fd6abc1e5ceeafb08b1, vars: {}, profile: gcp_hospital_medallion, target: dev, version: 1.12.2
+[0m18:44:16.389471 [debug] [MainThread]: Partial parsing enabled: 0 files deleted, 0 files added, 0 files changed.
+[0m18:44:16.389613 [debug] [MainThread]: Nothing changed, skipping partial parsing.
+[0m18:44:16.389692 [debug] [MainThread]: Partial parsing enabled, no changes found, skipping parsing
+[0m18:44:16.393148 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'load_project', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x11590b250>]}
+[0m18:44:16.469899 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/manifest.json
+[0m18:44:16.471021 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/semantic_manifest.json
+[0m18:44:16.475816 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/osi_document.json
+[0m18:44:16.488701 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'resource_counts', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115ab7200>]}
+[0m18:44:16.488867 [info ] [MainThread]: Found 10 models, 50 data tests, 1 seed, 1 snapshot, 1 analysis, 7 sources, 681 macros
+[0m18:44:16.490563 [info ] [MainThread]: 
+[0m18:44:16.490683 [info ] [MainThread]: Concurrency: 4 threads (target='dev')
+[0m18:44:16.490764 [info ] [MainThread]: 
+[0m18:44:16.490946 [debug] [MainThread]: Acquiring new bigquery connection 'master'
+[0m18:44:16.492373 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_project-5fbc8bf7-2dd6-4f0a-a5f'
+[0m18:44:16.492492 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:44:16.492658 [debug] [ThreadPool]: Acquiring new bigquery connection 'list_project-5fbc8bf7-2dd6-4f0a-a5f'
+[0m18:44:16.492832 [debug] [ThreadPool]: Opening a new connection, currently in state init
+[0m18:44:18.078810 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_project-5fbc8bf7-2dd6-4f0a-a5f, now list_project-5fbc8bf7-2dd6-4f0a-a5f_hospital_gold)
+[0m18:44:18.079900 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:44:18.079625 [debug] [ThreadPool]: Re-using an available connection from the pool (formerly list_project-5fbc8bf7-2dd6-4f0a-a5f, now list_project-5fbc8bf7-2dd6-4f0a-a5f_hospital_silver)
+[0m18:44:18.080925 [debug] [ThreadPool]: Opening a new connection, currently in state closed
+[0m18:44:18.896134 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'runnable_timing', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115b3c210>]}
+[0m18:44:18.896982 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m18:44:18.904994 [debug] [Thread-2 (]: Began running node model.gcp_hospital_medallion.stg_billing
+[0m18:44:18.905301 [debug] [Thread-1 (]: Began running node model.gcp_hospital_medallion.stg_admissions
+[0m18:44:18.906569 [info ] [Thread-1 (]: 1 of 62 START sql view model hospital_silver.stg_admissions .................... [RUN]
+[0m18:44:18.906867 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly list_project-5fbc8bf7-2dd6-4f0a-a5f_hospital_gold, now model.gcp_hospital_medallion.stg_admissions)
+[0m18:44:18.907082 [debug] [Thread-1 (]: Began compiling node model.gcp_hospital_medallion.stg_admissions
+[0m18:44:18.905561 [debug] [Thread-3 (]: Began running node model.gcp_hospital_medallion.stg_departments
+[0m18:44:18.905796 [debug] [Thread-4 (]: Began running node model.gcp_hospital_medallion.stg_discharges
+[0m18:44:18.906225 [info ] [Thread-2 (]: 2 of 62 START sql view model hospital_silver.stg_billing ....................... [RUN]
+[0m18:44:18.916663 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly list_project-5fbc8bf7-2dd6-4f0a-a5f_hospital_silver, now model.gcp_hospital_medallion.stg_billing)
+[0m18:44:18.916926 [debug] [Thread-2 (]: Began compiling node model.gcp_hospital_medallion.stg_billing
+[0m18:44:18.918334 [debug] [Thread-2 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_billing"
+[0m18:44:18.915412 [debug] [Thread-1 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_admissions"
+[0m18:44:18.915820 [info ] [Thread-3 (]: 3 of 62 START sql view model hospital_silver.stg_departments ................... [RUN]
+[0m18:44:18.916265 [info ] [Thread-4 (]: 4 of 62 START sql view model hospital_silver.stg_discharges .................... [RUN]
+[0m18:44:18.919204 [debug] [Thread-4 (]: Acquiring new bigquery connection 'model.gcp_hospital_medallion.stg_discharges'
+[0m18:44:18.919449 [debug] [Thread-4 (]: Began compiling node model.gcp_hospital_medallion.stg_discharges
+[0m18:44:18.920577 [debug] [Thread-4 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_discharges"
+[0m18:44:18.918885 [debug] [Thread-3 (]: Acquiring new bigquery connection 'model.gcp_hospital_medallion.stg_departments'
+[0m18:44:18.920959 [debug] [Thread-3 (]: Began compiling node model.gcp_hospital_medallion.stg_departments
+[0m18:44:18.923067 [debug] [Thread-3 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_departments"
+[0m18:44:18.921478 [debug] [Thread-2 (]: Began executing node model.gcp_hospital_medallion.stg_billing
+[0m18:44:18.921248 [debug] [Thread-1 (]: Began executing node model.gcp_hospital_medallion.stg_admissions
+[0m18:44:18.929994 [debug] [Thread-4 (]: Began executing node model.gcp_hospital_medallion.stg_discharges
+[0m18:44:18.936760 [debug] [Thread-4 (]: Opening a new connection, currently in state init
+[0m18:44:18.935830 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:44:18.936949 [debug] [Thread-3 (]: Began executing node model.gcp_hospital_medallion.stg_departments
+[0m18:44:18.935020 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:44:18.939121 [debug] [Thread-3 (]: Opening a new connection, currently in state init
+[0m18:44:18.945748 [debug] [Thread-3 (]: Compilation Error in model stg_departments (models/silver/stg_departments.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_departments`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_departments` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_departments (models/silver/stg_departments.sql)
+[0m18:44:18.946229 [debug] [Thread-4 (]: Compilation Error in model stg_discharges (models/silver/stg_discharges.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_discharges`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_discharges` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_discharges (models/silver/stg_discharges.sql)
+[0m18:44:18.947467 [debug] [Thread-1 (]: Compilation Error in model stg_admissions (models/silver/stg_admissions.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_admissions`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_admissions` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_admissions (models/silver/stg_admissions.sql)
+[0m18:44:18.948657 [debug] [Thread-2 (]: Compilation Error in model stg_billing (models/silver/stg_billing.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_billing`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_billing` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_billing (models/silver/stg_billing.sql)
+[0m18:44:18.949765 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115bd3790>]}
+[0m18:44:18.950069 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115c0afc0>]}
+[0m18:44:18.950442 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115bd9c70>]}
+[0m18:44:18.950838 [error] [Thread-2 (]: 2 of 62 ERROR creating sql view model hospital_silver.stg_billing .............. [[31mERROR[0m in 0.03s]
+[0m18:44:18.951068 [debug] [Thread-2 (]: Finished running node model.gcp_hospital_medallion.stg_billing
+[0m18:44:18.951251 [debug] [Thread-2 (]: Began running node model.gcp_hospital_medallion.stg_doctors
+[0m18:44:18.951418 [info ] [Thread-2 (]: 5 of 62 START sql view model hospital_silver.stg_doctors ....................... [RUN]
+[0m18:44:18.949901 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115b53a10>]}
+[0m18:44:18.951967 [error] [Thread-4 (]: 4 of 62 ERROR creating sql view model hospital_silver.stg_discharges ........... [[31mERROR[0m in 0.03s]
+[0m18:44:18.950287 [error] [Thread-3 (]: 3 of 62 ERROR creating sql view model hospital_silver.stg_departments .......... [[31mERROR[0m in 0.03s]
+[0m18:44:18.952332 [debug] [Thread-3 (]: Finished running node model.gcp_hospital_medallion.stg_departments
+[0m18:44:18.952468 [debug] [Thread-3 (]: Began running node model.gcp_hospital_medallion.stg_encounters
+[0m18:44:18.950642 [error] [Thread-1 (]: 1 of 62 ERROR creating sql view model hospital_silver.stg_admissions ........... [[31mERROR[0m in 0.04s]
+[0m18:44:18.952794 [debug] [Thread-1 (]: Finished running node model.gcp_hospital_medallion.stg_admissions
+[0m18:44:18.951618 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_billing' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_billing (models/silver/stg_billing.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_billing`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_billing` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_billing (models/silver/stg_billing.sql).
+[0m18:44:18.951774 [debug] [Thread-2 (]: Re-using an available connection from the pool (formerly model.gcp_hospital_medallion.stg_billing, now model.gcp_hospital_medallion.stg_doctors)
+[0m18:44:18.953476 [debug] [Thread-2 (]: Began compiling node model.gcp_hospital_medallion.stg_doctors
+[0m18:44:18.952163 [debug] [Thread-4 (]: Finished running node model.gcp_hospital_medallion.stg_discharges
+[0m18:44:18.952913 [debug] [Thread-1 (]: Began running node model.gcp_hospital_medallion.stg_registrations
+[0m18:44:18.953279 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_departments' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_departments (models/silver/stg_departments.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_departments`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_departments` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_departments (models/silver/stg_departments.sql).
+[0m18:44:18.952609 [info ] [Thread-3 (]: 6 of 62 START sql view model hospital_silver.stg_encounters .................... [RUN]
+[0m18:44:18.954904 [debug] [Thread-3 (]: Re-using an available connection from the pool (formerly model.gcp_hospital_medallion.stg_departments, now model.gcp_hospital_medallion.stg_encounters)
+[0m18:44:18.955029 [debug] [Thread-3 (]: Began compiling node model.gcp_hospital_medallion.stg_encounters
+[0m18:44:18.955675 [debug] [Thread-3 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_encounters"
+[0m18:44:18.954715 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_admissions' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_admissions (models/silver/stg_admissions.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_admissions`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_admissions` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_admissions (models/silver/stg_admissions.sql).
+[0m18:44:18.954182 [debug] [Thread-2 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_doctors"
+[0m18:44:18.954342 [debug] [Thread-4 (]: Began running node seed.gcp_hospital_medallion.department_category
+[0m18:44:18.954500 [info ] [Thread-1 (]: 7 of 62 START sql incremental model hospital_silver.stg_registrations .......... [RUN]
+[0m18:44:18.956463 [debug] [Thread-1 (]: Re-using an available connection from the pool (formerly model.gcp_hospital_medallion.stg_admissions, now model.gcp_hospital_medallion.stg_registrations)
+[0m18:44:18.956570 [debug] [Thread-1 (]: Began compiling node model.gcp_hospital_medallion.stg_registrations
+[0m18:44:18.959327 [debug] [Thread-1 (]: Writing injected SQL for node "model.gcp_hospital_medallion.stg_registrations"
+[0m18:44:18.955909 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_discharges' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_discharges (models/silver/stg_discharges.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_discharges`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_discharges` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_discharges (models/silver/stg_discharges.sql).
+[0m18:44:18.956181 [info ] [Thread-4 (]: 8 of 62 START seed file hospital_silver.department_category .................... [RUN]
+[0m18:44:18.959709 [debug] [Thread-4 (]: Re-using an available connection from the pool (formerly model.gcp_hospital_medallion.stg_discharges, now seed.gcp_hospital_medallion.department_category)
+[0m18:44:18.956343 [debug] [Thread-3 (]: Began executing node model.gcp_hospital_medallion.stg_encounters
+[0m18:44:18.960390 [debug] [Thread-3 (]: Opening a new connection, currently in state closed
+[0m18:44:18.959834 [debug] [Thread-4 (]: Began compiling node seed.gcp_hospital_medallion.department_category
+[0m18:44:18.959456 [debug] [Thread-2 (]: Began executing node model.gcp_hospital_medallion.stg_doctors
+[0m18:44:18.961733 [debug] [Thread-2 (]: Opening a new connection, currently in state closed
+[0m18:44:18.960518 [debug] [Thread-1 (]: Began executing node model.gcp_hospital_medallion.stg_registrations
+[0m18:44:18.961182 [debug] [Thread-4 (]: Began executing node seed.gcp_hospital_medallion.department_category
+[0m18:44:18.970370 [debug] [Thread-3 (]: Compilation Error in model stg_encounters (models/silver/stg_encounters.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_encounters`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_encounters` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_encounters (models/silver/stg_encounters.sql)
+[0m18:44:18.981096 [debug] [Thread-3 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x118947bd0>]}
+[0m18:44:18.982019 [debug] [Thread-2 (]: Compilation Error in model stg_doctors (models/silver/stg_doctors.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_doctors`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_doctors` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_doctors (models/silver/stg_doctors.sql)
+[0m18:44:18.992732 [debug] [Thread-2 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1188c41a0>]}
+[0m18:44:18.992322 [debug] [Thread-1 (]: On model.gcp_hospital_medallion.stg_registrations: /* {"app": "dbt", "dbt_version": "1.12.2", "profile_name": "gcp_hospital_medallion", "target_name": "dev", "node_id": "model.gcp_hospital_medallion.stg_registrations"} */
+select * from (
+        
+
+SELECT
+    registration_id,
+    first_name,
+    last_name,
+    date_of_birth,
+    gender,
+    
+    NULLIF(TRIM(UPPER(city)), '')
+ AS city,
+    registration_date,
+    status,
+    created_at,
+    updated_at
+
+FROM `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_bronze`.`registrations`
+
+
+
+WHERE updated_at >= TIMESTAMP_SUB(
+    (
+        SELECT MAX(updated_at)
+        FROM `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_registrations`
+    ),
+    INTERVAL 1 HOUR
+)
+
+
+    ) as __dbt_sbq
+    where false and current_timestamp() = current_timestamp()
+    limit 0
+
+[0m18:44:18.993245 [debug] [Thread-1 (]: Opening a new connection, currently in state closed
+[0m18:44:18.992583 [error] [Thread-3 (]: 6 of 62 ERROR creating sql view model hospital_silver.stg_encounters ........... [[31mERROR[0m in 0.03s]
+[0m18:44:18.993923 [debug] [Thread-3 (]: Finished running node model.gcp_hospital_medallion.stg_encounters
+[0m18:44:18.994588 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_billing_bill_id.1928b4ed68
+[0m18:44:18.995198 [info ] [Thread-3 (]: 9 of 62 SKIP test not_null_stg_billing_bill_id ................................. [[33mSKIP[0m]
+[0m18:44:18.993099 [error] [Thread-2 (]: 5 of 62 ERROR creating sql view model hospital_silver.stg_doctors .............. [[31mERROR[0m in 0.04s]
+[0m18:44:18.996213 [debug] [Thread-2 (]: Finished running node model.gcp_hospital_medallion.stg_doctors
+[0m18:44:18.996344 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_stg_billing_registration_id.b3fcc3e333
+[0m18:44:18.995053 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_encounters' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_encounters (models/silver/stg_encounters.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_encounters`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_encounters` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_encounters (models/silver/stg_encounters.sql).
+[0m18:44:18.996664 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_doctors' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_doctors (models/silver/stg_doctors.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_doctors`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_doctors` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_doctors (models/silver/stg_doctors.sql).
+[0m18:44:18.995814 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_billing_bill_id.1928b4ed68
+[0m18:44:18.997069 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.unique_stg_billing_bill_id.7008708fc9
+[0m18:44:18.997203 [info ] [Thread-3 (]: 11 of 62 SKIP test unique_stg_billing_bill_id .................................. [[33mSKIP[0m]
+[0m18:44:18.997432 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.unique_stg_billing_bill_id.7008708fc9
+[0m18:44:18.997546 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_billing_updated_at__created_at.448075226c
+[0m18:44:18.997971 [info ] [Thread-3 (]: 12 of 62 SKIP test updated_at_not_before_created_at_stg_billing_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:18.998108 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_billing_updated_at__created_at.448075226c
+[0m18:44:18.996453 [info ] [Thread-2 (]: 10 of 62 SKIP test not_null_stg_billing_registration_id ........................ [[33mSKIP[0m]
+[0m18:44:18.998403 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_billing_registration_id.b3fcc3e333
+[0m18:44:18.997314 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_billing_bill_id.1928b4ed68' to be skipped because of status 'skipped'. 
+[0m18:44:18.998696 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_billing_bill_id.7008708fc9' to be skipped because of status 'skipped'. 
+[0m18:44:18.998795 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_billing_updated_at__created_at.448075226c' to be skipped because of status 'skipped'. 
+[0m18:44:18.998887 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_billing_registration_id.b3fcc3e333' to be skipped because of status 'skipped'. 
+[0m18:44:18.998526 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.unique_stg_departments_department_id.8e1b8b707b
+[0m18:44:18.999073 [info ] [Thread-2 (]: 14 of 62 SKIP test unique_stg_departments_department_id ........................ [[33mSKIP[0m]
+[0m18:44:18.999229 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.unique_stg_departments_department_id.8e1b8b707b
+[0m18:44:18.999347 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_departments_updated_at__created_at.4f6db1aca2
+[0m18:44:18.999453 [info ] [Thread-2 (]: 15 of 62 SKIP test updated_at_not_before_created_at_stg_departments_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:18.999565 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_departments_updated_at__created_at.4f6db1aca2
+[0m18:44:18.999780 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_stg_admissions_admission_id.9974668cd5
+[0m18:44:18.998250 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_departments_department_id.ce7f6f5cf8
+[0m18:44:19.000012 [info ] [Thread-3 (]: 13 of 62 SKIP test not_null_stg_departments_department_id ...................... [[33mSKIP[0m]
+[0m18:44:19.000176 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_departments_department_id.ce7f6f5cf8
+[0m18:44:19.000294 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_admissions_encounter_id.613d5e055a
+[0m18:44:19.000385 [info ] [Thread-3 (]: 17 of 62 SKIP test not_null_stg_admissions_encounter_id ........................ [[33mSKIP[0m]
+[0m18:44:19.000544 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_admissions_encounter_id.613d5e055a
+[0m18:44:19.000653 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_admissions_registration_id.c5aa566782
+[0m18:44:19.000764 [info ] [Thread-3 (]: 18 of 62 SKIP test not_null_stg_admissions_registration_id ..................... [[33mSKIP[0m]
+[0m18:44:18.999661 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_departments_department_id.8e1b8b707b' to be skipped because of status 'skipped'. 
+[0m18:44:18.999890 [info ] [Thread-2 (]: 16 of 62 SKIP test not_null_stg_admissions_admission_id ........................ [[33mSKIP[0m]
+[0m18:44:19.001176 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_admissions_admission_id.9974668cd5
+[0m18:44:19.001295 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_admissions_department_id__department_id__ref_stg_departments_.d8dc59e37b
+[0m18:44:19.001405 [info ] [Thread-2 (]: 19 of 62 SKIP test relationships_stg_admissions_department_id__department_id__ref_stg_departments_  [[33mSKIP[0m]
+[0m18:44:19.001532 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_admissions_department_id__department_id__ref_stg_departments_.d8dc59e37b
+[0m18:44:19.001639 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_billing_admission_id__admission_id__ref_stg_admissions_.1d06d323f0
+[0m18:44:19.001743 [info ] [Thread-2 (]: 20 of 62 SKIP test relationships_stg_billing_admission_id__admission_id__ref_stg_admissions_  [[33mSKIP[0m]
+[0m18:44:19.001864 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_billing_admission_id__admission_id__ref_stg_admissions_.1d06d323f0
+[0m18:44:19.002048 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.unique_stg_admissions_admission_id.bc99100827
+[0m18:44:19.000875 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_admissions_registration_id.c5aa566782
+[0m18:44:19.002391 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_admissions_updated_at__created_at.8b104281f9
+[0m18:44:19.001045 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_departments_updated_at__created_at.4f6db1aca2' to be skipped because of status 'skipped'. 
+[0m18:44:19.002655 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_departments_department_id.ce7f6f5cf8' to be skipped because of status 'skipped'. 
+[0m18:44:19.002778 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_admissions_encounter_id.613d5e055a' to be skipped because of status 'skipped'. 
+[0m18:44:19.002892 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_admissions_admission_id.9974668cd5' to be skipped because of status 'skipped'. 
+[0m18:44:19.002988 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_admissions_department_id__department_id__ref_stg_departments_.d8dc59e37b' to be skipped because of status 'skipped'. 
+[0m18:44:19.003084 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_billing_admission_id__admission_id__ref_stg_admissions_.1d06d323f0' to be skipped because of status 'skipped'. 
+[0m18:44:19.003193 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_admissions_registration_id.c5aa566782' to be skipped because of status 'skipped'. 
+[0m18:44:19.002253 [info ] [Thread-2 (]: 21 of 62 SKIP test unique_stg_admissions_admission_id .......................... [[33mSKIP[0m]
+[0m18:44:19.003327 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.unique_stg_admissions_admission_id.bc99100827
+[0m18:44:19.003435 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.discharge_after_admission
+[0m18:44:19.002518 [info ] [Thread-3 (]: 22 of 62 SKIP test updated_at_not_before_created_at_stg_admissions_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:19.003763 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_admissions_updated_at__created_at.8b104281f9
+[0m18:44:19.003886 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_discharges_admission_id.43d9df17a3
+[0m18:44:19.003989 [info ] [Thread-3 (]: 24 of 62 SKIP test not_null_stg_discharges_admission_id ........................ [[33mSKIP[0m]
+[0m18:44:19.004112 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_discharges_admission_id.43d9df17a3
+[0m18:44:19.004214 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_discharges_discharge_id.fffe12bb65
+[0m18:44:19.004314 [info ] [Thread-3 (]: 25 of 62 SKIP test not_null_stg_discharges_discharge_id ........................ [[33mSKIP[0m]
+[0m18:44:19.004462 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_discharges_discharge_id.fffe12bb65
+[0m18:44:19.004564 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_discharges_registration_id.95ddcf7f61
+[0m18:44:19.003542 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_admissions_admission_id.bc99100827' to be skipped because of status 'skipped'. 
+[0m18:44:19.004783 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_admissions_updated_at__created_at.8b104281f9' to be skipped because of status 'skipped'. 
+[0m18:44:19.003643 [info ] [Thread-2 (]: 23 of 62 SKIP test discharge_after_admission ................................... [[33mSKIP[0m]
+[0m18:44:19.005044 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.discharge_after_admission
+[0m18:44:19.005153 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_billing_discharge_id__discharge_id__ref_stg_discharges_.3dc4399212
+[0m18:44:19.005270 [info ] [Thread-2 (]: 27 of 62 SKIP test relationships_stg_billing_discharge_id__discharge_id__ref_stg_discharges_  [[33mSKIP[0m]
+[0m18:44:19.005411 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_billing_discharge_id__discharge_id__ref_stg_discharges_.3dc4399212
+[0m18:44:19.005517 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_discharges_admission_id__admission_id__ref_stg_admissions_.91ef449f39
+[0m18:44:19.005628 [info ] [Thread-2 (]: 28 of 62 SKIP test relationships_stg_discharges_admission_id__admission_id__ref_stg_admissions_  [[33mSKIP[0m]
+[0m18:44:19.005753 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_discharges_admission_id__admission_id__ref_stg_admissions_.91ef449f39
+[0m18:44:19.004667 [info ] [Thread-3 (]: 26 of 62 SKIP test not_null_stg_discharges_registration_id ..................... [[33mSKIP[0m]
+[0m18:44:19.005997 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_discharges_registration_id.95ddcf7f61
+[0m18:44:19.004928 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_discharges_admission_id.43d9df17a3' to be skipped because of status 'skipped'. 
+[0m18:44:19.006237 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_discharges_discharge_id.fffe12bb65' to be skipped because of status 'skipped'. 
+[0m18:44:19.006330 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.discharge_after_admission' to be skipped because of status 'skipped'. 
+[0m18:44:19.006426 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_billing_discharge_id__discharge_id__ref_stg_discharges_.3dc4399212' to be skipped because of status 'skipped'. 
+[0m18:44:19.006523 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_discharges_admission_id__admission_id__ref_stg_admissions_.91ef449f39' to be skipped because of status 'skipped'. 
+[0m18:44:19.006612 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_discharges_registration_id.95ddcf7f61' to be skipped because of status 'skipped'. 
+[0m18:44:19.005857 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.unique_stg_discharges_discharge_id.12af024ee1
+[0m18:44:19.006728 [info ] [Thread-2 (]: 29 of 62 SKIP test unique_stg_discharges_discharge_id .......................... [[33mSKIP[0m]
+[0m18:44:19.006835 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.unique_stg_discharges_discharge_id.12af024ee1
+[0m18:44:19.006979 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.accepted_values_stg_encounters_encounter_type__Emergency__Follow_up__OPD.538f21d5c7
+[0m18:44:19.007189 [info ] [Thread-2 (]: 31 of 62 SKIP test accepted_values_stg_encounters_encounter_type__Emergency__Follow_up__OPD  [[33mSKIP[0m]
+[0m18:44:19.007311 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.accepted_values_stg_encounters_encounter_type__Emergency__Follow_up__OPD.538f21d5c7
+[0m18:44:19.006124 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_discharges_updated_at__created_at.687b0819db
+[0m18:44:19.007555 [info ] [Thread-3 (]: 30 of 62 SKIP test updated_at_not_before_created_at_stg_discharges_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:19.007672 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_discharges_updated_at__created_at.687b0819db
+[0m18:44:19.007772 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_encounters_encounter_id.496522771b
+[0m18:44:19.007893 [info ] [Thread-3 (]: 33 of 62 SKIP test not_null_stg_encounters_encounter_id ........................ [[33mSKIP[0m]
+[0m18:44:19.008007 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_encounters_encounter_id.496522771b
+[0m18:44:19.008109 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.not_null_stg_encounters_registration_id.20f5062263
+[0m18:44:19.008246 [info ] [Thread-3 (]: 34 of 62 SKIP test not_null_stg_encounters_registration_id ..................... [[33mSKIP[0m]
+[0m18:44:19.007075 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_discharges_discharge_id.12af024ee1' to be skipped because of status 'skipped'. 
+[0m18:44:19.008495 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.accepted_values_stg_encounters_encounter_type__Emergency__Follow_up__OPD.538f21d5c7' to be skipped because of status 'skipped'. 
+[0m18:44:19.008598 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_discharges_updated_at__created_at.687b0819db' to be skipped because of status 'skipped'. 
+[0m18:44:19.007427 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.accepted_values_stg_encounters_status__Completed.d7bccf761f
+[0m18:44:19.008806 [info ] [Thread-2 (]: 32 of 62 SKIP test accepted_values_stg_encounters_status__Completed ............ [[33mSKIP[0m]
+[0m18:44:19.008919 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.accepted_values_stg_encounters_status__Completed.d7bccf761f
+[0m18:44:19.009021 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_admissions_encounter_id__encounter_id__ref_stg_encounters_.454c3f73bb
+[0m18:44:19.009144 [info ] [Thread-2 (]: 35 of 62 SKIP test relationships_stg_admissions_encounter_id__encounter_id__ref_stg_encounters_  [[33mSKIP[0m]
+[0m18:44:19.009269 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_admissions_encounter_id__encounter_id__ref_stg_encounters_.454c3f73bb
+[0m18:44:19.009373 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_billing_encounter_id__encounter_id__ref_stg_encounters_.461881f92b
+[0m18:44:19.009474 [info ] [Thread-2 (]: 36 of 62 SKIP test relationships_stg_billing_encounter_id__encounter_id__ref_stg_encounters_  [[33mSKIP[0m]
+[0m18:44:19.009581 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_billing_encounter_id__encounter_id__ref_stg_encounters_.461881f92b
+[0m18:44:19.009695 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_encounters_department_id__department_id__ref_stg_departments_.0f1f1a2411
+[0m18:44:19.008374 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_encounters_registration_id.20f5062263
+[0m18:44:19.008689 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_encounters_encounter_id.496522771b' to be skipped because of status 'skipped'. 
+[0m18:44:19.010055 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.accepted_values_stg_encounters_status__Completed.d7bccf761f' to be skipped because of status 'skipped'. 
+[0m18:44:19.010152 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_admissions_encounter_id__encounter_id__ref_stg_encounters_.454c3f73bb' to be skipped because of status 'skipped'. 
+[0m18:44:19.010247 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_billing_encounter_id__encounter_id__ref_stg_encounters_.461881f92b' to be skipped because of status 'skipped'. 
+[0m18:44:19.010352 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_encounters_registration_id.20f5062263' to be skipped because of status 'skipped'. 
+[0m18:44:19.009942 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.unique_stg_encounters_encounter_id.ceefcd814c
+[0m18:44:19.010511 [info ] [Thread-3 (]: 38 of 62 SKIP test unique_stg_encounters_encounter_id .......................... [[33mSKIP[0m]
+[0m18:44:19.010626 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.unique_stg_encounters_encounter_id.ceefcd814c
+[0m18:44:19.010744 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_encounters_updated_at__created_at.0aa0b64e7e
+[0m18:44:19.009811 [info ] [Thread-2 (]: 37 of 62 SKIP test relationships_stg_encounters_department_id__department_id__ref_stg_departments_  [[33mSKIP[0m]
+[0m18:44:19.011067 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_encounters_department_id__department_id__ref_stg_departments_.0f1f1a2411
+[0m18:44:19.011175 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_stg_doctors_doctor_id.a078313b58
+[0m18:44:19.011285 [info ] [Thread-2 (]: 40 of 62 SKIP test not_null_stg_doctors_doctor_id .............................. [[33mSKIP[0m]
+[0m18:44:19.011406 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_doctors_doctor_id.a078313b58
+[0m18:44:19.011517 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_admissions_doctor_id__doctor_id__ref_stg_doctors_.11044f990a
+[0m18:44:19.011624 [info ] [Thread-2 (]: 41 of 62 SKIP test relationships_stg_admissions_doctor_id__doctor_id__ref_stg_doctors_  [[33mSKIP[0m]
+[0m18:44:19.011732 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_admissions_doctor_id__doctor_id__ref_stg_doctors_.11044f990a
+[0m18:44:19.011856 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_encounters_doctor_id__doctor_id__ref_stg_doctors_.77df9fe6a6
+[0m18:44:19.011977 [info ] [Thread-2 (]: 42 of 62 SKIP test relationships_stg_encounters_doctor_id__doctor_id__ref_stg_doctors_  [[33mSKIP[0m]
+[0m18:44:19.010832 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_encounters_encounter_id.ceefcd814c' to be skipped because of status 'skipped'. 
+[0m18:44:19.012206 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_encounters_department_id__department_id__ref_stg_departments_.0f1f1a2411' to be skipped because of status 'skipped'. 
+[0m18:44:19.010935 [info ] [Thread-3 (]: 39 of 62 SKIP test updated_at_not_before_created_at_stg_encounters_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:19.012424 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_encounters_updated_at__created_at.0aa0b64e7e
+[0m18:44:19.012528 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.unique_stg_doctors_doctor_id.9a716723a5
+[0m18:44:19.012626 [info ] [Thread-3 (]: 43 of 62 SKIP test unique_stg_doctors_doctor_id ................................ [[33mSKIP[0m]
+[0m18:44:19.012733 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.unique_stg_doctors_doctor_id.9a716723a5
+[0m18:44:19.012835 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_doctors_updated_at__created_at.55561502ee
+[0m18:44:19.012934 [info ] [Thread-3 (]: 44 of 62 SKIP test updated_at_not_before_created_at_stg_doctors_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:19.013054 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_doctors_updated_at__created_at.55561502ee
+[0m18:44:19.013167 [debug] [Thread-3 (]: Began running node model.gcp_hospital_medallion.billing_summary
+[0m18:44:19.012090 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_encounters_doctor_id__doctor_id__ref_stg_doctors_.77df9fe6a6
+[0m18:44:19.013273 [info ] [Thread-3 (]: 45 of 62 SKIP relation hospital_gold.billing_summary ........................... [[33mSKIP[0m]
+[0m18:44:19.012301 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_doctors_doctor_id.a078313b58' to be skipped because of status 'skipped'. 
+[0m18:44:19.013547 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_admissions_doctor_id__doctor_id__ref_stg_doctors_.11044f990a' to be skipped because of status 'skipped'. 
+[0m18:44:19.013640 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_encounters_updated_at__created_at.0aa0b64e7e' to be skipped because of status 'skipped'. 
+[0m18:44:19.013735 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_doctors_doctor_id.9a716723a5' to be skipped because of status 'skipped'. 
+[0m18:44:19.013849 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_doctors_updated_at__created_at.55561502ee' to be skipped because of status 'skipped'. 
+[0m18:44:19.013950 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_encounters_doctor_id__doctor_id__ref_stg_doctors_.77df9fe6a6' to be skipped because of status 'skipped'. 
+[0m18:44:19.013425 [debug] [Thread-3 (]: Finished running node model.gcp_hospital_medallion.billing_summary
+[0m18:44:19.014128 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.billing_summary' to be skipped because of status 'skipped'. 
+[0m18:44:19.014290 [debug] [Thread-2 (]: Began running node model.gcp_hospital_medallion.encounter_summary
+[0m18:44:19.014518 [info ] [Thread-2 (]: 46 of 62 SKIP relation hospital_gold.encounter_summary ......................... [[33mSKIP[0m]
+[0m18:44:19.014630 [debug] [Thread-2 (]: Finished running node model.gcp_hospital_medallion.encounter_summary
+[0m18:44:19.014763 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_billing_summary_registration_id.309dcb1244
+[0m18:44:19.014953 [info ] [Thread-2 (]: 48 of 62 SKIP test not_null_billing_summary_registration_id .................... [[33mSKIP[0m]
+[0m18:44:19.015093 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_billing_summary_registration_id.309dcb1244
+[0m18:44:19.015202 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.unique_billing_summary_registration_id.3a98d549cc
+[0m18:44:19.015311 [info ] [Thread-2 (]: 49 of 62 SKIP test unique_billing_summary_registration_id ...................... [[33mSKIP[0m]
+[0m18:44:19.015422 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.unique_billing_summary_registration_id.3a98d549cc
+[0m18:44:19.014851 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.encounter_summary' to be skipped because of status 'skipped'. 
+[0m18:44:19.014407 [debug] [Thread-3 (]: Began running node snapshot.gcp_hospital_medallion.doctors_snapshot
+[0m18:44:19.015681 [info ] [Thread-3 (]: 47 of 62 SKIP relation hospital_silver.doctors_snapshot ........................ [[33mSKIP[0m]
+[0m18:44:19.015905 [debug] [Thread-3 (]: Finished running node snapshot.gcp_hospital_medallion.doctors_snapshot
+[0m18:44:19.016008 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.unique_encounter_summary_encounter_id.ae487d5fd6
+[0m18:44:19.016110 [info ] [Thread-3 (]: 51 of 62 SKIP test unique_encounter_summary_encounter_id ....................... [[33mSKIP[0m]
+[0m18:44:19.016239 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.unique_encounter_summary_encounter_id.ae487d5fd6
+[0m18:44:19.015795 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_encounter_summary_encounter_id.e47b4ebd06
+[0m18:44:19.016356 [info ] [Thread-2 (]: 50 of 62 SKIP test not_null_encounter_summary_encounter_id ..................... [[33mSKIP[0m]
+[0m18:44:19.016465 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_encounter_summary_encounter_id.e47b4ebd06
+[0m18:44:19.015538 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_billing_summary_registration_id.309dcb1244' to be skipped because of status 'skipped'. 
+[0m18:44:19.016608 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_billing_summary_registration_id.3a98d549cc' to be skipped because of status 'skipped'. 
+[0m18:44:19.016759 [debug] [Thread-7 (]: Marking all children of 'snapshot.gcp_hospital_medallion.doctors_snapshot' to be skipped because of status 'skipped'. 
+[0m18:44:19.016849 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_encounter_summary_encounter_id.ae487d5fd6' to be skipped because of status 'skipped'. 
+[0m18:44:19.016945 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_encounter_summary_encounter_id.e47b4ebd06' to be skipped because of status 'skipped'. 
+[0m18:44:19.040423 [debug] [Thread-4 (]: Opening a new connection, currently in state closed
+[0m18:44:20.221817 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=project-5fbc8bf7-2dd6-4f0a-a5f&j=bq:asia-south1:951e7eab-31b6-47a0-8023-b1de6b46a933&page=queryresults
+[0m18:44:20.631393 [debug] [Thread-1 (]: SQL status: OK in 0.408 seconds
+[0m18:44:20.647809 [debug] [Thread-1 (]: On model.gcp_hospital_medallion.stg_registrations: /* {"app": "dbt", "dbt_version": "1.12.2", "profile_name": "gcp_hospital_medallion", "target_name": "dev", "node_id": "model.gcp_hospital_medallion.stg_registrations"} */
+select * from (
+        select
+    
+      
+    cast(null as string)
+ as registration_id, 
+      
+    cast(null as string)
+ as first_name, 
+      
+    cast(null as string)
+ as last_name, 
+      
+    cast(null as date)
+ as date_of_birth, 
+      
+    cast(null as string)
+ as gender, 
+      
+    cast(null as string)
+ as city, 
+      
+    cast(null as timestamp)
+ as registration_date, 
+      
+    cast(null as string)
+ as status, 
+      
+    cast(null as timestamp)
+ as created_at, 
+      
+    cast(null as timestamp)
+ as updated_at
+    ) as __dbt_sbq
+    where false and current_timestamp() = current_timestamp()
+    limit 0
+
+[0m18:44:21.397712 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=project-5fbc8bf7-2dd6-4f0a-a5f&j=bq:asia-south1:4bf8ae02-8577-4b74-8ed9-8d25875b5b79&page=queryresults
+[0m18:44:21.668764 [debug] [Thread-1 (]: SQL status: OK in 0.270 seconds
+[0m18:44:21.690216 [debug] [Thread-1 (]: On model.gcp_hospital_medallion.stg_registrations: /* {"app": "dbt", "dbt_version": "1.12.2", "profile_name": "gcp_hospital_medallion", "target_name": "dev", "node_id": "model.gcp_hospital_medallion.stg_registrations"} */
+
+  
+    
+
+    create or replace table `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_registrations__dbt_tmp184418978404`
+        
+  (
+    registration_id string,
+    first_name string,
+    last_name string,
+    date_of_birth date,
+    gender string,
+    city string,
+    registration_date timestamp,
+    status string,
+    created_at timestamp,
+    updated_at timestamp
+    
+    )
+
+      
+    
+    
+
+    
+    OPTIONS(
+      expiration_timestamp=TIMESTAMP_ADD(CURRENT_TIMESTAMP(), INTERVAL 12 hour)
+    )
+    as (
+      
+    select registration_id, first_name, last_name, date_of_birth, gender, city, registration_date, status, created_at, updated_at
+    from (
+        
+
+SELECT
+    registration_id,
+    first_name,
+    last_name,
+    date_of_birth,
+    gender,
+    
+    NULLIF(TRIM(UPPER(city)), '')
+ AS city,
+    registration_date,
+    status,
+    created_at,
+    updated_at
+
+FROM `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_bronze`.`registrations`
+
+
+
+WHERE updated_at >= TIMESTAMP_SUB(
+    (
+        SELECT MAX(updated_at)
+        FROM `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_registrations`
+    ),
+    INTERVAL 1 HOUR
+)
+
+
+    ) as model_subq
+    );
+  
+[0m18:44:22.418407 [debug] [Thread-1 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=project-5fbc8bf7-2dd6-4f0a-a5f&j=bq:asia-south1:fa417230-e36b-4547-8e89-b6fd4b1fe383&page=queryresults
+[0m18:44:23.699869 [debug] [Thread-1 (]: SQL status: OK in 1.280 seconds
+[0m18:44:23.908785 [debug] [Thread-4 (]: On seed.gcp_hospital_medallion.department_category: /* {"app": "dbt", "dbt_version": "1.12.2", "profile_name": "gcp_hospital_medallion", "target_name": "dev", "node_id": "seed.gcp_hospital_medallion.department_category"} */
+
+    alter table `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`department_category` set OPTIONS()
+  
+[0m18:44:24.368801 [debug] [Thread-1 (]: Compilation Error in model stg_registrations (models/silver/stg_registrations.sql)
+  
+              The source and target schemas on this incremental model are out of sync!
+              They can be reconciled in several ways:
+                - set the `on_schema_change` config to either append_new_columns or sync_all_columns, depending on your situation.
+                - Re-run the incremental model with `full_refresh: True` to update the target schema.
+                - update the schema manually and re-run the process.
+  
+              Additional troubleshooting context:
+                 Source columns not in target: []
+                 Target columns not in source: [<BigQueryColumn full_name (STRING, NULLABLE)>]
+                 New column types: []
+          
+  
+  > in macro bigquery__process_schema_changes (macros/materializations/models/incremental/on_schema_change.sql)
+  > called by macro materialization_incremental_bigquery (macros/materializations/incremental.sql)
+  > called by model stg_registrations (models/silver/stg_registrations.sql)
+[0m18:44:24.369746 [debug] [Thread-1 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1188e1310>]}
+[0m18:44:24.370306 [error] [Thread-1 (]: 7 of 62 ERROR creating sql incremental model hospital_silver.stg_registrations . [[31mERROR[0m in 5.41s]
+[0m18:44:24.370731 [debug] [Thread-1 (]: Finished running node model.gcp_hospital_medallion.stg_registrations
+[0m18:44:24.371133 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.stg_registrations' to be skipped because of status 'error'.  Reason: Compilation Error in model stg_registrations (models/silver/stg_registrations.sql)
+  
+              The source and target schemas on this incremental model are out of sync!
+              They can be reconciled in several ways:
+                - set the `on_schema_change` config to either append_new_columns or sync_all_columns, depending on your situation.
+                - Re-run the incremental model with `full_refresh: True` to update the target schema.
+                - update the schema manually and re-run the process.
+  
+              Additional troubleshooting context:
+                 Source columns not in target: []
+                 Target columns not in source: [<BigQueryColumn full_name (STRING, NULLABLE)>]
+                 New column types: []
+          
+  
+  > in macro bigquery__process_schema_changes (macros/materializations/models/incremental/on_schema_change.sql)
+  > called by macro materialization_incremental_bigquery (macros/materializations/incremental.sql)
+  > called by model stg_registrations (models/silver/stg_registrations.sql).
+[0m18:44:24.371766 [debug] [Thread-1 (]: Began running node test.gcp_hospital_medallion.relationships_stg_admissions_registration_id__registration_id__ref_stg_registrations_.64bcacf93d
+[0m18:44:24.372037 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.accepted_values_stg_registrations_status__Active__Inactive.815b5b9898
+[0m18:44:24.372716 [info ] [Thread-3 (]: 52 of 62 SKIP test accepted_values_stg_registrations_status__Active__Inactive .. [[33mSKIP[0m]
+[0m18:44:24.372968 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.accepted_values_stg_registrations_status__Active__Inactive.815b5b9898
+[0m18:44:24.373457 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.relationships_stg_billing_registration_id__registration_id__ref_stg_registrations_.c98fe47100
+[0m18:44:24.372467 [info ] [Thread-1 (]: 54 of 62 SKIP test relationships_stg_admissions_registration_id__registration_id__ref_stg_registrations_  [[33mSKIP[0m]
+[0m18:44:24.374527 [debug] [Thread-1 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_admissions_registration_id__registration_id__ref_stg_registrations_.64bcacf93d
+[0m18:44:24.372250 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_stg_registrations_registration_id.73466800b2
+[0m18:44:24.374198 [info ] [Thread-3 (]: 55 of 62 SKIP test relationships_stg_billing_registration_id__registration_id__ref_stg_registrations_  [[33mSKIP[0m]
+[0m18:44:24.373793 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.accepted_values_stg_registrations_status__Active__Inactive.815b5b9898' to be skipped because of status 'skipped'. 
+[0m18:44:24.376088 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_admissions_registration_id__registration_id__ref_stg_registrations_.64bcacf93d' to be skipped because of status 'skipped'. 
+[0m18:44:24.375402 [info ] [Thread-2 (]: 53 of 62 SKIP test not_null_stg_registrations_registration_id .................. [[33mSKIP[0m]
+[0m18:44:24.376441 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_stg_registrations_registration_id.73466800b2
+[0m18:44:24.375023 [debug] [Thread-1 (]: Began running node test.gcp_hospital_medallion.relationships_stg_discharges_registration_id__registration_id__ref_stg_registrations_.9c81be525d
+[0m18:44:24.375777 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_billing_registration_id__registration_id__ref_stg_registrations_.c98fe47100
+[0m18:44:24.377521 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.unique_stg_registrations_registration_id.e527fff031
+[0m18:44:24.377746 [info ] [Thread-3 (]: 58 of 62 SKIP test unique_stg_registrations_registration_id .................... [[33mSKIP[0m]
+[0m18:44:24.377988 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.unique_stg_registrations_registration_id.e527fff031
+[0m18:44:24.376738 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.relationships_stg_encounters_registration_id__registration_id__ref_stg_registrations_.dcf2e9e5c3
+[0m18:44:24.376986 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_stg_registrations_registration_id.73466800b2' to be skipped because of status 'skipped'. 
+[0m18:44:24.377240 [info ] [Thread-1 (]: 56 of 62 SKIP test relationships_stg_discharges_registration_id__registration_id__ref_stg_registrations_  [[33mSKIP[0m]
+[0m18:44:24.378914 [debug] [Thread-1 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_discharges_registration_id__registration_id__ref_stg_registrations_.9c81be525d
+[0m18:44:24.378432 [info ] [Thread-2 (]: 57 of 62 SKIP test relationships_stg_encounters_registration_id__registration_id__ref_stg_registrations_  [[33mSKIP[0m]
+[0m18:44:24.379171 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.relationships_stg_encounters_registration_id__registration_id__ref_stg_registrations_.dcf2e9e5c3
+[0m18:44:24.378209 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_registrations_updated_at__created_at.07f1952954
+[0m18:44:24.379425 [info ] [Thread-3 (]: 59 of 62 SKIP test updated_at_not_before_created_at_stg_registrations_updated_at__created_at  [[33mSKIP[0m]
+[0m18:44:24.379692 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_registrations_updated_at__created_at.07f1952954
+[0m18:44:24.378668 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_billing_registration_id__registration_id__ref_stg_registrations_.c98fe47100' to be skipped because of status 'skipped'. 
+[0m18:44:24.379916 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_stg_registrations_registration_id.e527fff031' to be skipped because of status 'skipped'. 
+[0m18:44:24.380109 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_discharges_registration_id__registration_id__ref_stg_registrations_.9c81be525d' to be skipped because of status 'skipped'. 
+[0m18:44:24.380321 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.relationships_stg_encounters_registration_id__registration_id__ref_stg_registrations_.dcf2e9e5c3' to be skipped because of status 'skipped'. 
+[0m18:44:24.380509 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.updated_at_not_before_created_at_stg_registrations_updated_at__created_at.07f1952954' to be skipped because of status 'skipped'. 
+[0m18:44:24.380826 [debug] [Thread-1 (]: Began running node model.gcp_hospital_medallion.patient_360
+[0m18:44:24.381061 [info ] [Thread-1 (]: 60 of 62 SKIP relation hospital_gold.patient_360 ............................... [[33mSKIP[0m]
+[0m18:44:24.381301 [debug] [Thread-1 (]: Finished running node model.gcp_hospital_medallion.patient_360
+[0m18:44:24.381486 [debug] [Thread-7 (]: Marking all children of 'model.gcp_hospital_medallion.patient_360' to be skipped because of status 'skipped'. 
+[0m18:44:24.381793 [debug] [Thread-2 (]: Began running node test.gcp_hospital_medallion.not_null_patient_360_registration_id.2c10f4698a
+[0m18:44:24.382230 [info ] [Thread-2 (]: 61 of 62 SKIP test not_null_patient_360_registration_id ........................ [[33mSKIP[0m]
+[0m18:44:24.382466 [debug] [Thread-2 (]: Finished running node test.gcp_hospital_medallion.not_null_patient_360_registration_id.2c10f4698a
+[0m18:44:24.382649 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.not_null_patient_360_registration_id.2c10f4698a' to be skipped because of status 'skipped'. 
+[0m18:44:24.382013 [debug] [Thread-3 (]: Began running node test.gcp_hospital_medallion.unique_patient_360_registration_id.8af6824d59
+[0m18:44:24.382889 [info ] [Thread-3 (]: 62 of 62 SKIP test unique_patient_360_registration_id .......................... [[33mSKIP[0m]
+[0m18:44:24.383115 [debug] [Thread-3 (]: Finished running node test.gcp_hospital_medallion.unique_patient_360_registration_id.8af6824d59
+[0m18:44:24.383292 [debug] [Thread-7 (]: Marking all children of 'test.gcp_hospital_medallion.unique_patient_360_registration_id.8af6824d59' to be skipped because of status 'skipped'. 
+[0m18:44:24.443500 [debug] [Thread-4 (]: BigQuery adapter: https://console.cloud.google.com/bigquery?project=project-5fbc8bf7-2dd6-4f0a-a5f&j=bq:asia-south1:137121c8-41ed-4814-a0d8-fec0109910fb&page=queryresults
+[0m18:44:25.135199 [debug] [Thread-4 (]: SQL status: OK in 0.691 seconds
+[0m18:44:25.144172 [debug] [Thread-4 (]: Writing runtime SQL for node "seed.gcp_hospital_medallion.department_category"
+[0m18:44:25.164206 [debug] [Thread-4 (]: Sending event: {'category': 'dbt', 'action': 'run_model', 'label': '8573711f-ec68-479f-9420-c3cab8a5e3e4', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115c07cb0>]}
+[0m18:44:25.164668 [info ] [Thread-4 (]: 8 of 62 OK loaded seed file hospital_silver.department_category ................ [[32mINSERT 5[0m in 6.20s]
+[0m18:44:25.165034 [debug] [Thread-4 (]: Finished running node seed.gcp_hospital_medallion.department_category
+[0m18:44:25.166233 [debug] [MainThread]: Opening a new connection, currently in state closed
+[0m18:44:25.166734 [debug] [MainThread]: Connection 'master' was properly closed.
+[0m18:44:25.166907 [debug] [MainThread]: Connection 'model.gcp_hospital_medallion.stg_registrations' was properly closed.
+[0m18:44:25.167050 [debug] [MainThread]: Connection 'model.gcp_hospital_medallion.stg_doctors' was properly closed.
+[0m18:44:25.167176 [debug] [MainThread]: Connection 'model.gcp_hospital_medallion.stg_encounters' was properly closed.
+[0m18:44:25.167297 [debug] [MainThread]: Connection 'seed.gcp_hospital_medallion.department_category' was properly closed.
+[0m18:44:25.167564 [info ] [MainThread]: 
+[0m18:44:25.167752 [info ] [MainThread]: Finished running 1 incremental model, 1 seed, 1 snapshot, 3 table models, 50 data tests, 6 view models in 0 hours 0 minutes and 8.68 seconds (8.68s).
+[0m18:44:25.169335 [debug] [MainThread]: Command end result
+[0m18:44:25.198451 [debug] [MainThread]: Wrote artifact WritableManifest to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/manifest.json
+[0m18:44:25.199830 [debug] [MainThread]: Wrote artifact SemanticManifest to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/semantic_manifest.json
+[0m18:44:25.200901 [debug] [MainThread]: Wrote artifact OsiDocument to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/osi_document.json
+[0m18:44:25.204306 [debug] [MainThread]: Wrote artifact RunExecutionResult to /Users/venkatramireddy/Documents/gcp/gcp-hospital-medallion/target/run_results.json
+[0m18:44:25.204419 [info ] [MainThread]: 
+[0m18:44:25.204537 [info ] [MainThread]: [31mCompleted with 7 errors, 0 partial successes, and 0 warnings:[0m
+[0m18:44:25.204630 [info ] [MainThread]: 
+[0m18:44:25.204752 [error] [MainThread]: [[31mERROR[0m]: in model stg_billing (models/silver/stg_billing.sql)
+[0m18:44:25.204875 [error] [MainThread]:   Compilation Error in model stg_billing (models/silver/stg_billing.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_billing`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_billing` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_billing (models/silver/stg_billing.sql)
+[0m18:44:25.204970 [info ] [MainThread]: 
+[0m18:44:25.205069 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_billing.sql
+[0m18:44:25.205149 [info ] [MainThread]: 
+[0m18:44:25.205252 [error] [MainThread]: [[31mERROR[0m]: in model stg_departments (models/silver/stg_departments.sql)
+[0m18:44:25.205364 [error] [MainThread]:   Compilation Error in model stg_departments (models/silver/stg_departments.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_departments`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_departments` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_departments (models/silver/stg_departments.sql)
+[0m18:44:25.205450 [info ] [MainThread]: 
+[0m18:44:25.205540 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_departments.sql
+[0m18:44:25.205610 [info ] [MainThread]: 
+[0m18:44:25.205703 [error] [MainThread]: [[31mERROR[0m]: in model stg_admissions (models/silver/stg_admissions.sql)
+[0m18:44:25.205810 [error] [MainThread]:   Compilation Error in model stg_admissions (models/silver/stg_admissions.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_admissions`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_admissions` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_admissions (models/silver/stg_admissions.sql)
+[0m18:44:25.205893 [info ] [MainThread]: 
+[0m18:44:25.205981 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_admissions.sql
+[0m18:44:25.206051 [info ] [MainThread]: 
+[0m18:44:25.206141 [error] [MainThread]: [[31mERROR[0m]: in model stg_discharges (models/silver/stg_discharges.sql)
+[0m18:44:25.206246 [error] [MainThread]:   Compilation Error in model stg_discharges (models/silver/stg_discharges.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_discharges`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_discharges` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_discharges (models/silver/stg_discharges.sql)
+[0m18:44:25.206332 [info ] [MainThread]: 
+[0m18:44:25.206505 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_discharges.sql
+[0m18:44:25.206615 [info ] [MainThread]: 
+[0m18:44:25.206730 [error] [MainThread]: [[31mERROR[0m]: in model stg_encounters (models/silver/stg_encounters.sql)
+[0m18:44:25.206849 [error] [MainThread]:   Compilation Error in model stg_encounters (models/silver/stg_encounters.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_encounters`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_encounters` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_encounters (models/silver/stg_encounters.sql)
+[0m18:44:25.206944 [info ] [MainThread]: 
+[0m18:44:25.207039 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_encounters.sql
+[0m18:44:25.207176 [info ] [MainThread]: 
+[0m18:44:25.207340 [error] [MainThread]: [[31mERROR[0m]: in model stg_doctors (models/silver/stg_doctors.sql)
+[0m18:44:25.207482 [error] [MainThread]:   Compilation Error in model stg_doctors (models/silver/stg_doctors.sql)
+  Trying to create view `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_doctors`, but it currently exists as a table. Either drop `project-5fbc8bf7-2dd6-4f0a-a5f`.`hospital_silver`.`stg_doctors` manually, or run dbt with `--full-refresh` and dbt will drop it for you.
+  
+  > in macro bigquery__handle_existing_table (macros/materializations/view.sql)
+  > called by macro handle_existing_table (macros/relations/view/replace.sql)
+  > called by macro bigquery__create_or_replace_view (macros/relations/view/replace.sql)
+  > called by macro materialization_view_bigquery (macros/materializations/view.sql)
+  > called by model stg_doctors (models/silver/stg_doctors.sql)
+[0m18:44:25.207582 [info ] [MainThread]: 
+[0m18:44:25.207690 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_doctors.sql
+[0m18:44:25.207772 [info ] [MainThread]: 
+[0m18:44:25.207873 [error] [MainThread]: [[31mERROR[0m]: in model stg_registrations (models/silver/stg_registrations.sql)
+[0m18:44:25.207992 [error] [MainThread]:   Compilation Error in model stg_registrations (models/silver/stg_registrations.sql)
+  
+              The source and target schemas on this incremental model are out of sync!
+              They can be reconciled in several ways:
+                - set the `on_schema_change` config to either append_new_columns or sync_all_columns, depending on your situation.
+                - Re-run the incremental model with `full_refresh: True` to update the target schema.
+                - update the schema manually and re-run the process.
+  
+              Additional troubleshooting context:
+                 Source columns not in target: []
+                 Target columns not in source: [<BigQueryColumn full_name (STRING, NULLABLE)>]
+                 New column types: []
+          
+  
+  > in macro bigquery__process_schema_changes (macros/materializations/models/incremental/on_schema_change.sql)
+  > called by macro materialization_incremental_bigquery (macros/materializations/incremental.sql)
+  > called by model stg_registrations (models/silver/stg_registrations.sql)
+[0m18:44:25.208111 [info ] [MainThread]: 
+[0m18:44:25.208210 [info ] [MainThread]:   compiled code at target/compiled/gcp_hospital_medallion/models/silver/stg_registrations.sql
+[0m18:44:25.208294 [info ] [MainThread]: 
+[0m18:44:25.208396 [info ] [MainThread]: Done. PASS=1 WARN=0 ERROR=7 SKIP=54 NO-OP=0 REUSED=0 TOTAL=62
+[0m18:44:25.211311 [debug] [MainThread]: Resource report: {"command_name": "build", "command_success": false, "command_wall_clock_time": 9.296722, "process_in_blocks": "0", "process_kernel_time": 0.212718, "process_mem_max_rss": "274513920", "process_out_blocks": "0", "process_user_time": 1.334947}
+[0m18:44:25.211491 [debug] [MainThread]: Command `dbt build` failed at 18:44:25.211462 after 9.30 seconds
+[0m18:44:25.211639 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x1092cf350>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x115c05730>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x118c9c650>]}
+[0m18:44:25.211756 [debug] [MainThread]: Flushing usage events
+[0m18:44:26.670718 [debug] [MainThread]: An error was encountered while trying to flush usage events
