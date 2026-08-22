@@ -7,18 +7,18 @@ sources:
 
     tables:
       - name: departments
-
       - name: doctors
 
       - name: registrations
-        loaded_at_field: updated_at
-        freshness:
-          warn_after:
-            count: 30
-            period: minute
-          error_after:
-            count: 60
-            period: minute
+        config:
+          loaded_at_field: updated_at
+          freshness:
+            warn_after:
+              count: 30
+              period: minute
+            error_after:
+              count: 60
+              period: minute
 
       - name: encounters
       - name: admissions
