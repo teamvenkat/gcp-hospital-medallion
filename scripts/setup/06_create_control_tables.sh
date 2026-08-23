@@ -6,7 +6,7 @@ echo "======================================"
 echo "Creating Hospital Control Tables"
 echo "======================================"
 
-for file in for file in sql/control/ddl/*.sql
+for file in sql/control/ddl/*.sql
 do
     echo ""
     echo "===== Executing $file ====="
