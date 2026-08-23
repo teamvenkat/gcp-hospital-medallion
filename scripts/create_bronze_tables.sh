@@ -1,12 +1,11 @@
 #!/bin/bash
-
 set -e
 
 echo "======================================"
-echo "Creating Hospital Control Tables"
+echo "Creating Hospital Bronze Tables"
 echo "======================================"
 
-for file in for file in sql/control/ddl/*.sql
+for file in sql/bronze/*.sql
 do
     echo ""
     echo "===== Executing $file ====="
@@ -20,5 +19,5 @@ done
 
 echo ""
 echo "======================================"
-echo "All control tables created successfully"
+echo "All Bronze tables created successfully"
 echo "======================================"
