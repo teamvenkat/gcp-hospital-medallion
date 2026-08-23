@@ -1,0 +1,4 @@
+encounter_id,registration_id,doctor_id,department_id,encounter_date,encounter_type,diagnosis,status,created_at,updated_at
+ENC0106,REG0007,DOC003,D003,2026-08-22 10:20:00,Follow-up,Chest Pain,Completed,2026-08-22 10:00:00,2026-08-22 11:00:00
+ENC0107,REG0008,DOC004,D004,2026-08-22 11:20:00,Diagnostic,Migraine,Completed,2026-08-22 10:00:00,2026-08-22 11:00:00
+ENC0108,REG0009,DOC005,D005,2026-08-22 12:20:00,OPD,Fracture,Completed,2026-08-22 10:00:00,2026-08-22 11:00:00

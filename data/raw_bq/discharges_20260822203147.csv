@@ -1,0 +1,2 @@
+discharge_id,admission_id,registration_id,discharge_date,discharge_status,created_at,updated_at
+DIS0102,ADM0104,REG0007,2026-08-22 18:00:00,Transferred,2026-08-22 17:50:00,2026-08-22 18:00:00

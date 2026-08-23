@@ -1,0 +1,4 @@
+encounter_id,registration_id,doctor_id,department_id,encounter_date,encounter_type,diagnosis,status,created_at,updated_at
+ENC0100,REG0001,DOC001,D001,2026-08-20 10:20:00,OPD,Hypertension,Completed,2026-08-20 10:00:00,2026-08-20 11:00:00
+ENC0101,REG0002,DOC002,D002,2026-08-20 11:20:00,Emergency,Diabetes,Completed,2026-08-20 10:00:00,2026-08-20 11:00:00
+ENC0102,REG0003,DOC003,D003,2026-08-20 12:20:00,Follow-up,Chest Pain,Completed,2026-08-20 10:00:00,2026-08-20 11:00:00

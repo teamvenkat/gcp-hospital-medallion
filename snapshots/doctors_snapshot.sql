@@ -2,7 +2,7 @@
 
 {{
     config(
-        target_schema='hospital_silver',
+        target_schema='hospital_silver_ven',
         unique_key='doctor_id',
         strategy='check',
         check_cols=[

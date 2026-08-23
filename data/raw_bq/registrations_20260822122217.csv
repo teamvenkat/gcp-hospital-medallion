@@ -1,0 +1,4 @@
+registration_id,first_name,last_name,date_of_birth,gender,city,registration_date,status,created_at,updated_at
+REG0007,Sowmya,Reddy,1996-01-26,Female,Secunderabad,2026-08-22 09:15:00,Active,2026-08-22 08:10:12,2026-08-22 08:10:12
+REG0008,Vikram,Annapureddy,1985-09-03,Male,Vijayawada,2026-08-22 10:15:00,Active,2026-08-22 09:17:13,2026-08-22 09:17:13
+REG0009,Keerthi,Pagadala,1992-03-19,Female,Warangal,2026-08-22 11:15:00,Active,2026-08-22 10:24:14,2026-08-22 10:24:14

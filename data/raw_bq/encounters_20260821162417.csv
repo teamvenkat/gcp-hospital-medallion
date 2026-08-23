@@ -1,0 +1,4 @@
+encounter_id,registration_id,doctor_id,department_id,encounter_date,encounter_type,diagnosis,status,created_at,updated_at
+ENC0103,REG0004,DOC002,D002,2026-08-21 10:20:00,Emergency,Diabetes,Completed,2026-08-21 10:00:00,2026-08-21 11:00:00
+ENC0104,REG0005,DOC003,D003,2026-08-21 11:20:00,Follow-up,Chest Pain,Completed,2026-08-21 10:00:00,2026-08-21 11:00:00
+ENC0105,REG0006,DOC004,D004,2026-08-21 12:20:00,Diagnostic,Migraine,Completed,2026-08-21 10:00:00,2026-08-21 11:00:00

@@ -32,13 +32,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   gcp_hospital_medallion:
     silver:
-      +schema: hospital_silver
-      +materialized: view
+      +schema: hospital_silver_ven
+      +materialized: table
       +tags:
         - silver      
 
     gold:
-      +schema: hospital_gold
+      +schema: hospital_gold_ven
       +materialized: table
       +tags:
         - gold

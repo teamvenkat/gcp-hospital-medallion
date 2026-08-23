@@ -1,0 +1,4 @@
+registration_id,first_name,last_name,date_of_birth,gender,city,registration_date,status,created_at,updated_at
+REG0004,Sudhakar,Reddy,1987-02-14,Male,Tirupati,2026-08-21 09:15:00,Active,2026-08-21 08:10:12,2026-08-21 08:10:12
+REG0005,Lalitha,Durgempudi,1993-06-30,Female,Guntur,2026-08-21 10:15:00,Active,2026-08-21 09:17:13,2026-08-21 09:17:13
+REG0006,Arjun,Durgempudi,1989-11-12,Male,Hyderabad,2026-08-21 11:15:00,Active,2026-08-21 10:24:14,2026-08-21 10:24:14

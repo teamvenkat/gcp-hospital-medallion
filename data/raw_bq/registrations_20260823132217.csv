@@ -1,0 +1,5 @@
+registration_id,first_name,last_name,date_of_birth,gender,city,registration_date,status,created_at,updated_at
+REG0010,Mahesh,Reddy,1982-07-25,Male,Hyderabad,2026-08-23 09:15:00,Active,2026-08-23 08:10:12,2026-08-23 08:10:12
+REG0011,Divya,Annapureddy,1995-10-08,Female,Guntur,2026-08-23 10:15:00,Active,2026-08-23 09:17:13,2026-08-23 09:17:13
+REG0012,Ramesh,Durgempudi,1988-05-11,Male,Tirupati,2026-08-23 11:15:00,Active,2026-08-23 10:24:14,2026-08-23 10:24:14
+REG0001,Venkatrami,Reddy,1991-04-17,Male,Hyderabad,2026-08-23 10:25:00,Active,2026-08-20 08:10:12,2026-08-23 10:25:00
