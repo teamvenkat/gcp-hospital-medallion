@@ -846,8 +846,8 @@ def main() -> int:
     print(f"Failed               : {failed}")
     print(f"Mandatory missing    : {len(missing_entities)}")
     print(f"Mandatory failed     : {len(mandatory_failed_entities)}")
-    print(f"Records uploaded     : {uploaded_records}")
-    print("Records rejected     : 0")
+    print(f"Toal Records Identified     : {uploaded_records}")
+    print("Total Records Rejected     : 0")
     print(f"Run status           : {run_status}")
 
     return 1 if run_status != "SUCCESS" else 0
