@@ -25,7 +25,7 @@ Other behavior:
 - Transaction T-1 failures/missing files fail the pipeline
 - Append-only pipeline_run
 - file_ingestion_log and validation_error_log
-- Local processed/ and failed/ lifecycle folders
+- Local incoming/processed/skipped/failed/non_processed lifecycle folders
 - Failed retry scan across +/- 7 processing-date folders
 - No Bronze processing
 """
@@ -55,8 +55,11 @@ VALIDATION_ERROR_TABLE = "validation_error_log"
 GCS_BUCKET = "gcp-hospital-medallion-data"
 GCS_PREFIX = "raw_bq"
 DEFAULT_INPUT_DIR = Path("data/raw_bq")
+INCOMING_DIR_NAME = "incoming"
 PROCESSED_DIR_NAME = "processed"
+SKIPPED_DIR_NAME = "skipped"
 FAILED_DIR_NAME = "failed"
+NON_PROCESSED_DIR_NAME = "non_processed"
 FAILED_SCAN_DAYS = 7
 PIPELINE_NAME = "hospital_raw_file_ingestion"
 
@@ -310,17 +313,17 @@ def move_file_to_lifecycle_folder(
     folder_name: str,
     processing_date: date,
 ) -> Path:
-    # Always anchor lifecycle folders to the raw input root.
-    # Successful files are grouped by processing date.
-    # Failed files remain in the flat failed/ retry queue.
-    if folder_name == PROCESSED_DIR_NAME:
-        destination_dir = (
-            input_dir
-            / PROCESSED_DIR_NAME
-            / processing_date.isoformat()
-        )
-    else:
-        destination_dir = input_dir / FAILED_DIR_NAME
+    if folder_name not in {
+        PROCESSED_DIR_NAME,
+        SKIPPED_DIR_NAME,
+        FAILED_DIR_NAME,
+        NON_PROCESSED_DIR_NAME,
+    }:
+        raise ValueError(f"Unsupported lifecycle folder: {folder_name}")
+
+    destination_dir = (
+        input_dir / folder_name / processing_date.isoformat()
+    )
     destination_dir.mkdir(parents=True, exist_ok=True)
 
     destination = destination_dir / path.name
@@ -353,39 +356,46 @@ def discover_eligible_files(
     processing_date: date,
 ) -> tuple[List[Path], int, int]:
     expected_source = processing_date - timedelta(days=1)
-
+    incoming_dir = input_dir / INCOMING_DIR_NAME
     candidates: List[Path] = []
-    current_candidates = list(input_dir.glob("*.csv"))
-    candidates.extend(current_candidates)
 
+    if incoming_dir.exists():
+        candidates.extend(incoming_dir.glob("*.csv"))
+
+    # Failed and non-processed files are retry candidates.
     failed_root = input_dir / FAILED_DIR_NAME
     if failed_root.exists():
         for offset in range(-FAILED_SCAN_DAYS, FAILED_SCAN_DAYS + 1):
             scan_date = processing_date + timedelta(days=offset)
             scan_dir = failed_root / scan_date.isoformat()
-
             if scan_dir.exists():
                 candidates.extend(scan_dir.glob("*.csv"))
 
-    # Only files whose filename source date matches this run are eligible.
+    # Non-processed files can also become eligible during a backfill.
+    non_processed_root = input_dir / NON_PROCESSED_DIR_NAME
+    if non_processed_root.exists():
+        for offset in range(-FAILED_SCAN_DAYS, FAILED_SCAN_DAYS + 1):
+            scan_date = processing_date + timedelta(days=offset)
+            scan_dir = non_processed_root / scan_date.isoformat()
+            if scan_dir.exists():
+                candidates.extend(scan_dir.glob("*.csv"))
+
+
     eligible: List[Path] = []
     seen: Dict[str, str] = {}
 
     for path in candidates:
-        source_date = extract_source_date(path)
-        if source_date != expected_source:
+        if extract_source_date(path) != expected_source:
             continue
 
-        # Deduplicate by filename. Prefer a root/input copy over a failed copy.
         existing = seen.get(path.name)
         if existing:
             existing_path = Path(existing)
-            if existing_path.parent == input_dir:
+            if existing_path.parent == incoming_dir:
                 continue
-            if path.parent == input_dir:
+            if path.parent == incoming_dir:
                 eligible = [
-                    item for item in eligible
-                    if item.name != path.name
+                    item for item in eligible if item.name != path.name
                 ]
                 seen[path.name] = str(path)
                 eligible.append(path)
@@ -396,12 +406,26 @@ def discover_eligible_files(
 
     eligible.sort(key=lambda p: p.name)
 
-    current_eligible = sum(
-        1 for path in eligible if path.parent == input_dir
+    incoming_eligible = sum(
+        1 for path in eligible if path.parent == incoming_dir
     )
-    failed_eligible = len(eligible) - current_eligible
+    failed_eligible = sum(
+        1
+        for path in eligible
+        if path.parent.parent.name == FAILED_DIR_NAME
+    )
+    non_processed_eligible = sum(
+        1
+        for path in eligible
+        if path.parent.parent.name == NON_PROCESSED_DIR_NAME
+    )
 
-    return eligible, current_eligible, failed_eligible
+    return (
+        eligible,
+        incoming_eligible,
+        failed_eligible,
+        non_processed_eligible,
+    )
 
 
 def insert_final_pipeline_run(
@@ -753,9 +777,40 @@ def main() -> int:
         )
         return 2
 
-    files, current_eligible_count, failed_eligible_count = (
-        discover_eligible_files(input_dir, processing_date)
-    )
+    expected_source = processing_date - timedelta(days=1)
+
+    (
+        files,
+        incoming_eligible_count,
+        failed_eligible_count,
+        non_processed_eligible_count,
+    ) = discover_eligible_files(input_dir, processing_date)
+
+    # Move incoming files outside the current source-date scope to
+    # non_processed/<processing-date>/. They are not run failures.
+    incoming_dir = input_dir / INCOMING_DIR_NAME
+    non_processed_count = 0
+
+    if incoming_dir.exists():
+        for incoming_path in list(incoming_dir.glob("*.csv")):
+            if extract_source_date(incoming_path) != expected_source:
+                try:
+                    destination = move_file_to_lifecycle_folder(
+                        input_dir,
+                        incoming_path,
+                        NON_PROCESSED_DIR_NAME,
+                        processing_date,
+                    )
+                    non_processed_count += 1
+                    print(
+                        f"NON_PROCESSED: {incoming_path.name} "
+                        f"-> {destination}"
+                    )
+                except Exception as move_exc:
+                    print(
+                        f"FILE MOVE ERROR: could not move "
+                        f"'{incoming_path.name}': {move_exc}"
+                    )
 
     if not files:
         print(
@@ -785,8 +840,9 @@ def main() -> int:
     print(f"Expected source       : {expected_source}")
     print(f"Input directory       : {input_dir}")
     print(f"Files discovered      : {len(files)}")
-    print(f"  Current input       : {current_eligible_count}")
+    print(f"  Incoming eligible   : {incoming_eligible_count}")
     print(f"  Failed retry        : {failed_eligible_count}")
+    print(f"  Non-processed retry : {non_processed_eligible_count}")
     print(f"Failed scan window    : +/-{FAILED_SCAN_DAYS} days")
     print(f"Run ID                : {run_id}")
     print()
@@ -862,7 +918,7 @@ def main() -> int:
                     destination = move_file_to_lifecycle_folder(
                         input_dir,
                         path,
-                        PROCESSED_DIR_NAME,
+                        SKIPPED_DIR_NAME,
                         processing_date,
                     )
                     print(f"MOVED: {destination}")
@@ -1126,11 +1182,12 @@ def main() -> int:
     print(f"Processing date            : {processing_date}")
     print(f"Source date                : {expected_source}")
     print(f"Files discovered           : {len(results)}")
-    print(f"  Current input            : {current_eligible_count}")
+    print(f"  Current input            : {incoming_eligible_count}")
     print(f"  Failed retry             : {failed_eligible_count}")
     print(f"Files uploaded             : {success}")
     print(f"Files skipped              : {skipped}")
     print(f"Files failed               : {failed}")
+    print(f"Non-processed moved        : {non_processed_count}")
     print(f"Mandatory missing          : {len(fatal_missing_entities)}")
     print(f"Mandatory failed           : {len(mandatory_failed_entities)}")
     print(f"Master warnings            : {master_warning_count}")
