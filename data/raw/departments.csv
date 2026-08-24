@@ -1,7 +1,0 @@
-department_id,department_name,location,status,created_at,updated_at
-DEP001,General Medicine,Block A,Active,2026-01-01 08:00:00,2026-01-01 08:00:00
-DEP002,Cardiology,Block B,Active,2026-01-01 08:00:00,2026-01-01 08:00:00
-DEP003,Orthopedics,Block B,Active,2026-01-01 08:00:00,2026-01-01 08:00:00
-DEP004,Pediatrics,Block C,Active,2026-01-01 08:00:00,2026-01-01 08:00:00
-DEP005,Neurology,Block C,Active,2026-01-01 08:00:00,2026-01-01 08:00:00
-DEP006,Emergency,Block A,Active,2026-01-01 08:00:00,2026-01-01 08:00:00

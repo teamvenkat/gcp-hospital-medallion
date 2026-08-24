@@ -1,2 +1,0 @@
-discharge_id,admission_id,registration_id,discharge_date,discharge_status,created_at,updated_at
-DIS0100,ADM0100,REG0001,2026-08-20 18:00:00,Recovered,2026-08-20 17:50:00,2026-08-20 18:00:00

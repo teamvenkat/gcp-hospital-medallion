@@ -1,4 +1,0 @@
-encounter_id,registration_id,doctor_id,department_id,encounter_date,encounter_type,diagnosis,status,created_at,updated_at
-ENC0109,REG0010,DOC004,D004,2026-08-23 10:20:00,Diagnostic,Migraine,Completed,2026-08-23 10:00:00,2026-08-23 11:00:00
-ENC0110,REG0011,DOC005,D005,2026-08-23 11:20:00,OPD,Fracture,Completed,2026-08-23 10:00:00,2026-08-23 11:00:00
-ENC0111,REG0012,DOC006,D006,2026-08-23 12:20:00,Emergency,Fever,Completed,2026-08-23 10:00:00,2026-08-23 11:00:00

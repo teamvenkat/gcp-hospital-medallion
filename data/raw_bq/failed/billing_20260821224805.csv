@@ -1,4 +1,0 @@
-bill_id,registration_id,encounter_id,admission_id,discharge_id,bill_date,bill_type,bill_description,consultation_amount,procedure_amount,room_amount,other_amount,total_amount,payment_status,created_at,updated_at
-BIL0103,REG0004,ENC0103,ADM0102,,2026-08-21 19:05:00,Procedure,Routine hospital service,500.0,1000.0,1500.0,200.0,3200.0,Pending,2026-08-21 19:00:00,2026-08-21 19:30:00
-BIL0104,REG0005,ENC0104,ADM0103,,2026-08-21 20:05:00,Room,Routine hospital service,600.0,1250.0,2000.0,250.0,4100.0,Partially Paid,2026-08-21 19:00:00,2026-08-21 19:30:00
-BIL0105,REG0006,ENC0105,,,2026-08-21 21:05:00,Pharmacy,Routine hospital service,700.0,1500.0,0.0,300.0,2500.0,Paid,2026-08-21 19:00:00,2026-08-21 19:30:00

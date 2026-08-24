@@ -1,3 +1,0 @@
-admission_id,registration_id,encounter_id,admission_date,admission_type,ward,status,created_at,updated_at
-ADM0100,REG0001,ENC0100,2026-08-20 12:00:00,Emergency,General,Admitted,2026-08-20 11:30:00,2026-08-20 12:00:00
-ADM0101,REG0002,ENC0101,2026-08-20 13:00:00,Elective,ICU,Admitted,2026-08-20 11:30:00,2026-08-20 12:00:00
