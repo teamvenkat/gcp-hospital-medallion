@@ -24,8 +24,8 @@ Other behavior:
 - Append-only pipeline_run
 - file_ingestion_log and validation_error_log
 - No Bronze processing
-- Move successfully handled files to local processed/ folder
-- Move failed files to local failed/ folder
+- Move successfully handled files to local processed/<processing-date>/ folder
+- Move failed files to local failed/<processing-date>/ folder
 """
 
 import argparse
@@ -109,9 +109,17 @@ def count_csv_rows(path: Path) -> int:
         return sum(1 for _ in reader)
 
 
-def move_file_to_lifecycle_folder(path: Path, folder_name: str) -> None:
-    """Move a processed input file into its local lifecycle folder."""
-    destination_dir = path.parent / folder_name
+def move_file_to_lifecycle_folder(
+    path: Path,
+    folder_name: str,
+    processing_date: date,
+) -> None:
+    """Move a file into processed/failed/<processing-date>/."""
+    destination_dir = (
+        path.parent
+        / folder_name
+        / processing_date.isoformat()
+    )
     destination_dir.mkdir(parents=True, exist_ok=True)
     destination = destination_dir / path.name
 
@@ -744,8 +752,8 @@ def main() -> int:
                     f"SUCCESS (GCS, attempt {result.attempt_number})"
                 )
                 try:
-                    move_file_to_lifecycle_folder(path, PROCESSED_DIR_NAME)
-                    print(f"MOVED: {PROCESSED_DIR_NAME}/{path.name}")
+                    move_file_to_lifecycle_folder(path, PROCESSED_DIR_NAME, processing_date)
+                    print(f"MOVED: {PROCESSED_DIR_NAME}/{processing_date.isoformat()}/{path.name}")
                 except Exception as move_exc:
                     audit_errors.append(
                         f"Failed to move successful file '{path.name}' "
@@ -758,8 +766,8 @@ def main() -> int:
                     f"SKIPPED: {result.error_code} - {result.error_message}"
                 )
                 try:
-                    move_file_to_lifecycle_folder(path, PROCESSED_DIR_NAME)
-                    print(f"MOVED: {PROCESSED_DIR_NAME}/{path.name}")
+                    move_file_to_lifecycle_folder(path, PROCESSED_DIR_NAME, processing_date)
+                    print(f"MOVED: {PROCESSED_DIR_NAME}/{processing_date.isoformat()}/{path.name}")
                 except Exception as move_exc:
                     audit_errors.append(
                         f"Failed to move skipped file '{path.name}' "
@@ -789,8 +797,8 @@ def main() -> int:
                         print(f"AUDIT ERROR: {warning_exc}")
 
                 try:
-                    move_file_to_lifecycle_folder(path, FAILED_DIR_NAME)
-                    print(f"MOVED: {FAILED_DIR_NAME}/{path.name}")
+                    move_file_to_lifecycle_folder(path, FAILED_DIR_NAME, processing_date)
+                    print(f"MOVED: {FAILED_DIR_NAME}/{processing_date.isoformat()}/{path.name}")
                 except Exception as move_exc:
                     audit_errors.append(
                         f"Failed to move failed file '{path.name}' "
@@ -829,8 +837,8 @@ def main() -> int:
             )
 
             try:
-                move_file_to_lifecycle_folder(path, FAILED_DIR_NAME)
-                print(f"MOVED: {FAILED_DIR_NAME}/{path.name}")
+                move_file_to_lifecycle_folder(path, FAILED_DIR_NAME, processing_date)
+                print(f"MOVED: {FAILED_DIR_NAME}/{processing_date.isoformat()}/{path.name}")
             except Exception as move_exc:
                 audit_errors.append(
                     f"Failed to move unhandled-error file '{path.name}' "
