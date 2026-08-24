@@ -22,6 +22,9 @@ target/
 dbt_packages/
 logs/
 
+# source data files
+data/
+
 # IDE settings
 .vscode/
 .idea/
