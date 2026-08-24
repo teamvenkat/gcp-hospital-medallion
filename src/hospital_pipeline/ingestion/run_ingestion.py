@@ -24,12 +24,15 @@ Other behavior:
 - Append-only pipeline_run
 - file_ingestion_log and validation_error_log
 - No Bronze processing
+- Move successfully handled files to local processed/ folder
+- Move failed files to local failed/ folder
 """
 
 import argparse
 import csv
 import hashlib
 import re
+import shutil
 import sys
 import time
 import uuid
@@ -50,7 +53,18 @@ VALIDATION_ERROR_TABLE = "validation_error_log"
 GCS_BUCKET = "gcp-hospital-medallion-data"
 GCS_PREFIX = "raw_bq"
 DEFAULT_INPUT_DIR = Path("data/raw_bq")
+PROCESSED_DIR_NAME = "processed"
+FAILED_DIR_NAME = "failed"
 PIPELINE_NAME = "hospital_raw_file_ingestion"
+
+MASTER_ENTITIES = {"departments", "doctors"}
+TRANSACTION_ENTITIES = {
+    "registrations",
+    "encounters",
+    "admissions",
+    "discharges",
+    "billing",
+}
 
 DEFAULT_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 2
@@ -93,6 +107,20 @@ def count_csv_rows(path: Path) -> int:
         reader = csv.reader(handle)
         next(reader, None)
         return sum(1 for _ in reader)
+
+
+def move_file_to_lifecycle_folder(path: Path, folder_name: str) -> None:
+    """Move a processed input file into its local lifecycle folder."""
+    destination_dir = path.parent / folder_name
+    destination_dir.mkdir(parents=True, exist_ok=True)
+    destination = destination_dir / path.name
+
+    # Avoid overwriting an existing file with the same name.
+    if destination.exists():
+        timestamp = utc_now().strftime("%Y%m%d%H%M%S%f")
+        destination = destination_dir / f"{path.stem}_{timestamp}{path.suffix}"
+
+    shutil.move(str(path), str(destination))
 
 
 def load_config(client: bigquery.Client) -> Dict[str, dict]:
@@ -214,6 +242,45 @@ def insert_validation_error(
         raise RuntimeError(f"Failed to insert validation_error_log: {errors}")
 
 
+def insert_master_warning(
+    client: bigquery.Client,
+    run_id: str,
+    result: FileResult,
+    expected_source_date: date,
+) -> None:
+    table = f"{PROJECT_ID}.{CONTROL_DATASET}.{VALIDATION_ERROR_TABLE}"
+
+    row = {
+        "error_id": str(uuid.uuid4()),
+        "run_id": run_id,
+        "batch_id": None,
+        "file_name": result.file_name or None,
+        "entity_name": result.entity_name,
+        "validation_stage": "FILE_COMPLETENESS",
+        "error_type": result.error_code or "MASTER_WARNING",
+        "error_code": result.error_code or "MASTER_WARNING",
+        "column_name": None,
+        "record_identifier": None,
+        "raw_value": expected_source_date.isoformat(),
+        "error_message": result.error_message or (
+            f"Master file for entity '{result.entity_name}' "
+            f"was not successfully processed for source date "
+            f"{expected_source_date}"
+        ),
+        "severity": "WARNING",
+        "retryable": False,
+        "attempt_number": result.attempt_number,
+        "error_timestamp": utc_now().isoformat(),
+    }
+
+    errors = client.insert_rows_json(table, [row])
+    if errors:
+        raise RuntimeError(
+            f"Failed to insert master warning for "
+            f"{result.entity_name}: {errors}"
+        )
+
+
 def insert_missing_mandatory_error(
     client: bigquery.Client,
     run_id: str,
@@ -263,13 +330,14 @@ def insert_final_pipeline_run(
     missing_mandatory_count: int,
     mandatory_failed_count: int,
     error_message: Optional[str],
+    fatal_failure_count: int = 0,
 ) -> str:
     table = f"{PROJECT_ID}.{CONTROL_DATASET}.{PIPELINE_RUN_TABLE}"
 
     if missing_mandatory_count > 0 or mandatory_failed_count > 0:
         status = "FAILED"
-    elif failed > 0:
-        status = "PARTIAL_FAILURE"
+    elif fatal_failure_count > 0:
+        status = "FAILED"
     else:
         status = "SUCCESS"
 
@@ -675,14 +743,60 @@ def main() -> int:
                 print(
                     f"SUCCESS (GCS, attempt {result.attempt_number})"
                 )
+                try:
+                    move_file_to_lifecycle_folder(path, PROCESSED_DIR_NAME)
+                    print(f"MOVED: {PROCESSED_DIR_NAME}/{path.name}")
+                except Exception as move_exc:
+                    audit_errors.append(
+                        f"Failed to move successful file '{path.name}' "
+                        f"to {PROCESSED_DIR_NAME}: {move_exc}"
+                    )
+                    print(f"FILE MOVE ERROR: {move_exc}")
+
             elif result.status == "SKIPPED":
                 print(
                     f"SKIPPED: {result.error_code} - {result.error_message}"
                 )
+                try:
+                    move_file_to_lifecycle_folder(path, PROCESSED_DIR_NAME)
+                    print(f"MOVED: {PROCESSED_DIR_NAME}/{path.name}")
+                except Exception as move_exc:
+                    audit_errors.append(
+                        f"Failed to move skipped file '{path.name}' "
+                        f"to {PROCESSED_DIR_NAME}: {move_exc}"
+                    )
+                    print(f"FILE MOVE ERROR: {move_exc}")
+
             else:
                 print(
                     f"FAILED: {result.error_code} - {result.error_message}"
                 )
+
+                if result.entity_name in MASTER_ENTITIES:
+                    print(
+                        f"WARNING: MASTER_FILE_FAILED: "
+                        f"{result.entity_name} - pipeline continues"
+                    )
+                    try:
+                        insert_master_warning(
+                            bq_client,
+                            run_id,
+                            result,
+                            expected_source,
+                        )
+                    except Exception as warning_exc:
+                        audit_errors.append(str(warning_exc))
+                        print(f"AUDIT ERROR: {warning_exc}")
+
+                try:
+                    move_file_to_lifecycle_folder(path, FAILED_DIR_NAME)
+                    print(f"MOVED: {FAILED_DIR_NAME}/{path.name}")
+                except Exception as move_exc:
+                    audit_errors.append(
+                        f"Failed to move failed file '{path.name}' "
+                        f"to {FAILED_DIR_NAME}: {move_exc}"
+                    )
+                    print(f"FILE MOVE ERROR: {move_exc}")
 
         except Exception as exc:
             result = FileResult(
@@ -714,6 +828,16 @@ def main() -> int:
                 f"FAILED: UNHANDLED_ERROR - {exc}"
             )
 
+            try:
+                move_file_to_lifecycle_folder(path, FAILED_DIR_NAME)
+                print(f"MOVED: {FAILED_DIR_NAME}/{path.name}")
+            except Exception as move_exc:
+                audit_errors.append(
+                    f"Failed to move unhandled-error file '{path.name}' "
+                    f"to {FAILED_DIR_NAME}: {move_exc}"
+                )
+                print(f"FILE MOVE ERROR: {move_exc}")
+
         print()
 
     mandatory_entities = {
@@ -732,21 +856,47 @@ def main() -> int:
         print("======================================")
 
         for entity in missing_entities:
-            print(
-                f"MISSING_MANDATORY_FILE: {entity} "
-                f"for source date {expected_source}"
-            )
-
-            try:
-                insert_missing_mandatory_error(
-                    bq_client,
-                    run_id,
-                    entity,
-                    expected_source,
+            if entity in MASTER_ENTITIES:
+                print(
+                    f"WARNING: MISSING_MASTER_FILE: {entity} "
+                    f"for source date {expected_source}"
                 )
-            except Exception as exc:
-                audit_errors.append(str(exc))
-                print(f"AUDIT ERROR: {exc}")
+                warning_result = FileResult(
+                    file_name="",
+                    entity_name=entity,
+                    status="WARNING",
+                    error_code="MISSING_MASTER_FILE",
+                    error_message=(
+                        f"Master file for entity '{entity}' was not received "
+                        f"for source date {expected_source}"
+                    ),
+                )
+                try:
+                    insert_master_warning(
+                        bq_client,
+                        run_id,
+                        warning_result,
+                        expected_source,
+                    )
+                except Exception as exc:
+                    audit_errors.append(str(exc))
+                    print(f"AUDIT ERROR: {exc}")
+            else:
+                print(
+                    f"MISSING_MANDATORY_FILE: {entity} "
+                    f"for source date {expected_source}"
+                )
+
+                try:
+                    insert_missing_mandatory_error(
+                        bq_client,
+                        run_id,
+                        entity,
+                        expected_source,
+                    )
+                except Exception as exc:
+                    audit_errors.append(str(exc))
+                    print(f"AUDIT ERROR: {exc}")
 
         print()
 
@@ -765,7 +915,7 @@ def main() -> int:
 
         entity = result.entity_name
 
-        if entity not in mandatory_entities:
+        if entity not in TRANSACTION_ENTITIES:
             continue
 
         if entity in received_entities:
@@ -798,21 +948,45 @@ def main() -> int:
         if r.status == "SUCCESS"
     )
 
+    # Only expected-source-date transaction failures are fatal.
+    # Master failures are warnings. Stale/future files are moved to failed/
+    # but do not fail the pipeline merely because their date is invalid.
+    fatal_transaction_failures = sum(
+        1
+        for r in results
+        if (
+            r.status == "FAILED"
+            and r.entity_name in TRANSACTION_ENTITIES
+            and (
+                r.source_timestamp is None
+                or r.source_timestamp.date() == expected_source
+            )
+        )
+    )
+
+    fatal_missing_entities = {
+        entity for entity in missing_entities
+        if entity in TRANSACTION_ENTITIES
+    }
+
     error_parts = []
 
-    if failed:
+    if fatal_transaction_failures:
+        error_parts.append(
+            f"{fatal_transaction_failures} transaction file(s) failed"
+        )
         error_parts.append(
             f"{failed} file(s) failed during raw landing"
         )
 
-    if missing_entities:
+    if fatal_missing_entities:
         error_parts.append(
-            f"{len(missing_entities)} mandatory file(s) missing"
+            f"{len(fatal_missing_entities)} transaction file(s) missing"
         )
 
     if mandatory_failed_entities:
         error_parts.append(
-            f"{len(mandatory_failed_entities)} mandatory file(s) failed"
+            f"{len(mandatory_failed_entities)} transaction file(s) failed"
         )
 
     if audit_errors:
@@ -831,9 +1005,10 @@ def main() -> int:
         skipped,
         failed,
         uploaded_records,
-        len(missing_entities),
+        len(fatal_missing_entities),
         len(mandatory_failed_entities),
         final_error,
+        fatal_transaction_failures,
     )
 
     print("======================================")
@@ -844,10 +1019,21 @@ def main() -> int:
     print(f"Success              : {success}")
     print(f"Skipped              : {skipped}")
     print(f"Failed               : {failed}")
-    print(f"Mandatory missing    : {len(missing_entities)}")
+    master_warning_count = (
+        sum(
+            1
+            for r in results
+            if r.entity_name in MASTER_ENTITIES and r.status == "FAILED"
+        )
+        + sum(1 for e in missing_entities if e in MASTER_ENTITIES)
+    )
+
+    print(f"Mandatory missing    : {len(fatal_missing_entities)}")
     print(f"Mandatory failed     : {len(mandatory_failed_entities)}")
-    print(f"Toal Records Identified     : {uploaded_records}")
-    print("Total Records Rejected     : 0")
+    print(f"Master warnings      : {master_warning_count}")
+    print(f"Files uploaded        : {success}")
+    print(f"Records in uploaded files : {uploaded_records}")
+    print("Records rejected      : 0")
     print(f"Run status           : {run_status}")
 
     return 1 if run_status != "SUCCESS" else 0
