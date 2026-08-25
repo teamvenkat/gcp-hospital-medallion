@@ -26,13 +26,16 @@ Other behavior:
 - Append-only pipeline_run
 - file_ingestion_log and validation_error_log
 - Local incoming/processed/skipped/failed/non_processed lifecycle folders
-- Failed retry scan across +/- 7 processing-date folders
+- Failed and non-processed retry scan across +/- 7 processing-date folders
+- Cumulative mandatory completeness across repeated runs for the same source date
+- Local application logging to logs/ingestion/ingestion_YYYYMMDD.log
 - No Bronze processing
 """
 
 import argparse
 import csv
 import hashlib
+import logging
 import re
 import shutil
 import sys
@@ -79,6 +82,9 @@ FILENAME_RE = re.compile(
     r"^(?P<entity>[a-z][a-z0-9_]*)_(?P<timestamp>\d{14})\.csv$"
 )
 
+LOG_DIR = Path("logs/ingestion")
+LOGGER = logging.getLogger("hospital_ingestion")
+
 
 @dataclass
 class FileResult:
@@ -98,6 +104,25 @@ class FileResult:
 
 def utc_now() -> datetime:
     return datetime.now(timezone.utc)
+
+
+def setup_logging() -> None:
+    LOG_DIR.mkdir(parents=True, exist_ok=True)
+
+    log_file = LOG_DIR / (
+        f"ingestion_{utc_now().strftime('%Y%m%d')}.log"
+    )
+
+    LOGGER.setLevel(logging.INFO)
+    LOGGER.propagate = False
+
+    if not LOGGER.handlers:
+        formatter = logging.Formatter(
+            "%(asctime)s | %(levelname)s | %(message)s"
+        )
+        file_handler = logging.FileHandler(log_file)
+        file_handler.setFormatter(formatter)
+        LOGGER.addHandler(file_handler)
 
 
 def sha256_file(path: Path) -> str:
@@ -327,11 +352,9 @@ def move_file_to_lifecycle_folder(
     destination_dir.mkdir(parents=True, exist_ok=True)
 
     destination = destination_dir / path.name
+
     if destination.exists():
-        timestamp = utc_now().strftime("%Y%m%d%H%M%S%f")
-        destination = destination_dir / (
-            f"{path.stem}_{timestamp}{path.suffix}"
-        )
+        destination.unlink()
 
     shutil.move(str(path), str(destination))
     return destination
@@ -428,6 +451,64 @@ def discover_eligible_files(
     )
 
 
+def get_cumulative_entity_state(
+    client: bigquery.Client,
+    expected_source_date: date,
+) -> tuple[set[str], set[str]]:
+    """
+    Return cumulative entity state for a source date.
+
+    An entity is considered satisfied when any historical attempt for that
+    source date has processing_status UPLOADED or SKIPPED.
+
+    An entity is considered failed when it has a FAILED attempt and has not
+    been successfully satisfied.
+    """
+    query = f"""
+        SELECT
+            entity_name,
+            processing_status,
+            completed_at,
+            created_at
+        FROM `{PROJECT_ID}.{CONTROL_DATASET}.{FILE_LOG_TABLE}`
+        WHERE expected_source_date = @expected_source_date
+    """
+
+    job_config = bigquery.QueryJobConfig(
+        query_parameters=[
+            bigquery.ScalarQueryParameter(
+                "expected_source_date",
+                "DATE",
+                expected_source_date.isoformat(),
+            )
+        ]
+    )
+
+    successful_entities: set[str] = set()
+    failed_entities: set[str] = set()
+
+    for row in client.query(query, job_config=job_config).result():
+        entity = row["entity_name"]
+        status = row["processing_status"]
+
+        if status in {"UPLOADED", "SKIPPED"}:
+            successful_entities.add(entity)
+        elif status == "FAILED":
+            failed_entities.add(entity)
+
+    failed_entities -= successful_entities
+
+    LOGGER.info(
+        "Cumulative source-date state | source_date=%s | "
+        "successful_entities=%s | unresolved_failed_entities=%s",
+        expected_source_date,
+        sorted(successful_entities),
+        sorted(failed_entities),
+    )
+
+    return successful_entities, failed_entities
+
+
 def insert_final_pipeline_run(
     client: bigquery.Client,
     run_id: str,
@@ -450,8 +531,6 @@ def insert_final_pipeline_run(
         or fatal_transaction_failures > 0
     ):
         status = "FAILED"
-    elif failed > 0:
-        status = "PARTIAL_FAILURE"
     else:
         status = "SUCCESS"
 
@@ -495,9 +574,21 @@ def upload_to_gcs(
 
     for attempt in range(1, max_attempts + 1):
         try:
+            LOGGER.info(
+                "GCS upload attempt | file=%s | attempt=%s",
+                path.name,
+                attempt,
+            )
             blob.upload_from_filename(
                 str(path),
                 content_type="text/csv",
+            )
+            LOGGER.info(
+                "GCS upload success | file=%s | attempt=%s | uri=gs://%s/%s",
+                path.name,
+                attempt,
+                GCS_BUCKET,
+                destination,
             )
             return f"gs://{GCS_BUCKET}/{destination}", attempt
         except Exception as exc:
@@ -508,6 +599,13 @@ def upload_to_gcs(
                 print(
                     f"  Retryable GCS error on attempt {attempt}: {exc}"
                     f" | retrying in {sleep_seconds}s"
+                )
+                LOGGER.warning(
+                    "GCS retry | file=%s | attempt=%s | error=%s | sleep=%ss",
+                    path.name,
+                    attempt,
+                    exc,
+                    sleep_seconds,
                 )
                 time.sleep(sleep_seconds)
 
@@ -670,43 +768,6 @@ def process_file(
             file_size_bytes=file_size,
         )
 
-    duplicate_query = f"""
-        SELECT file_name
-        FROM `{PROJECT_ID}.{CONTROL_DATASET}.{FILE_LOG_TABLE}`
-        WHERE file_checksum = @checksum
-        LIMIT 1
-    """
-
-    job_config = bigquery.QueryJobConfig(
-        query_parameters=[
-            bigquery.ScalarQueryParameter(
-                "checksum",
-                "STRING",
-                checksum,
-            )
-        ]
-    )
-
-    duplicate = list(
-        bq_client.query(
-            duplicate_query,
-            job_config=job_config,
-        ).result()
-    )
-
-    if duplicate:
-        return FileResult(
-            path.name,
-            entity,
-            "FAILED",
-            "DUPLICATE_CONTENT",
-            f"Same SHA-256 checksum already exists for file '{duplicate[0]['file_name']}'",
-            checksum=checksum,
-            source_timestamp=source_timestamp,
-            row_count=row_count,
-            file_size_bytes=file_size,
-        )
-
     max_retries = cfg["max_retries"] or DEFAULT_RETRIES
 
     if not cfg["retry_enabled"]:
@@ -748,6 +809,9 @@ def process_file(
 
 
 def main() -> int:
+    setup_logging()
+    LOGGER.info("Ingestion invocation started")
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--processing-date", required=True)
     parser.add_argument(
@@ -779,6 +843,13 @@ def main() -> int:
 
     expected_source = processing_date - timedelta(days=1)
 
+    LOGGER.info(
+        "Processing request | processing_date=%s | expected_source=%s | input_dir=%s",
+        processing_date,
+        expected_source,
+        input_dir,
+    )
+
     (
         files,
         incoming_eligible_count,
@@ -806,10 +877,19 @@ def main() -> int:
                         f"NON_PROCESSED: {incoming_path.name} "
                         f"-> {destination}"
                     )
+                    LOGGER.info(
+                        "File moved | state=NON_PROCESSED | file=%s | destination=%s",
+                        incoming_path.name,
+                        destination,
+                    )
                 except Exception as move_exc:
                     print(
                         f"FILE MOVE ERROR: could not move "
                         f"'{incoming_path.name}': {move_exc}"
+                    )
+                    LOGGER.exception(
+                        "File move failed | state=NON_PROCESSED | file=%s",
+                        incoming_path.name,
                     )
 
     if not files:
@@ -825,6 +905,15 @@ def main() -> int:
 
     config = load_config(bq_client)
     processed_state = get_processed_file_state(bq_client)
+
+    LOGGER.info(
+        "Configuration loaded | active_entities=%s | mandatory_entities=%s",
+        sorted(config.keys()),
+        sorted(
+            entity for entity, cfg in config.items()
+            if cfg["mandatory"]
+        ),
+    )
 
     if not config:
         print(
@@ -866,6 +955,17 @@ def main() -> int:
 
             results.append(result)
 
+            LOGGER.info(
+                "File result | file=%s | entity=%s | status=%s | "
+                "error_code=%s | attempt=%s | rows=%s",
+                result.file_name,
+                result.entity_name,
+                result.status,
+                result.error_code,
+                result.attempt_number,
+                result.row_count,
+            )
+
             # A valid T-1 file counts as received even when it is skipped
             # because the same checksum was already processed.
             if (
@@ -890,6 +990,7 @@ def main() -> int:
             except Exception as exc:
                 audit_errors.append(str(exc))
                 print(f"AUDIT ERROR: {exc}")
+                LOGGER.exception("Audit insert failed")
 
             if result.status == "SUCCESS":
                 print(
@@ -922,6 +1023,11 @@ def main() -> int:
                         processing_date,
                     )
                     print(f"MOVED: {destination}")
+                    LOGGER.info(
+                        "File moved | state=SKIPPED | file=%s | destination=%s",
+                        path.name,
+                        destination,
+                    )
                 except Exception as move_exc:
                     audit_errors.append(
                         f"Failed to move skipped file '{path.name}': "
@@ -958,6 +1064,11 @@ def main() -> int:
                         processing_date,
                     )
                     print(f"MOVED: {destination}")
+                    LOGGER.info(
+                        "File moved | state=FAILED | file=%s | destination=%s",
+                        path.name,
+                        destination,
+                    )
                 except Exception as move_exc:
                     audit_errors.append(
                         f"Failed to move failed file '{path.name}': "
@@ -994,6 +1105,10 @@ def main() -> int:
             print(
                 f"FAILED: UNHANDLED_ERROR - {exc}"
             )
+            LOGGER.exception(
+                "Unhandled file-processing error | file=%s",
+                path.name,
+            )
 
             try:
                 destination = move_file_to_lifecycle_folder(
@@ -1018,8 +1133,31 @@ def main() -> int:
         if cfg["mandatory"]
     }
 
+    (
+        cumulative_successful_entities,
+        cumulative_failed_entities,
+    ) = get_cumulative_entity_state(
+        bq_client,
+        expected_source,
+    )
+
     missing_entities = sorted(
-        mandatory_entities - received_entities
+        mandatory_entities - cumulative_successful_entities
+    )
+
+    unresolved_failed_entities = sorted(
+        mandatory_entities
+        & cumulative_failed_entities
+        - cumulative_successful_entities
+    )
+
+    LOGGER.info(
+        "Mandatory cumulative state | mandatory=%s | satisfied=%s | "
+        "missing=%s | unresolved_failed=%s",
+        sorted(mandatory_entities),
+        sorted(mandatory_entities & cumulative_successful_entities),
+        missing_entities,
+        unresolved_failed_entities,
     )
 
     if missing_entities:
@@ -1072,25 +1210,20 @@ def main() -> int:
 
         print()
 
-    # Only transaction entities can make a run fail.
-    mandatory_failed_entities = set()
+    # Only unresolved transaction entities can make the processing date fail.
+    # A previous SUCCESS/SKIPPED for the same source date satisfies the entity,
+    # even if the current invocation does not contain that file.
+    mandatory_failed_entities = {
+        entity
+        for entity in unresolved_failed_entities
+        if entity in TRANSACTION_ENTITIES
+    }
 
-    for result in results:
-        if result.status != "FAILED":
-            continue
-
-        entity = result.entity_name
-        if entity not in TRANSACTION_ENTITIES:
-            continue
-
-        if entity in received_entities:
-            continue
-
-        if (
-            result.source_timestamp
-            and result.source_timestamp.date() == expected_source
-        ):
-            mandatory_failed_entities.add(entity)
+    fatal_missing_entities = {
+        entity
+        for entity in missing_entities
+        if entity in TRANSACTION_ENTITIES
+    }
 
     success = sum(r.status == "SUCCESS" for r in results)
     skipped = sum(r.status == "SKIPPED" for r in results)
@@ -1102,24 +1235,7 @@ def main() -> int:
         if r.status == "SUCCESS"
     )
 
-    fatal_transaction_failures = sum(
-        1
-        for r in results
-        if (
-            r.status == "FAILED"
-            and r.entity_name in TRANSACTION_ENTITIES
-            and (
-                r.source_timestamp is None
-                or r.source_timestamp.date() == expected_source
-            )
-        )
-    )
-
-    fatal_missing_entities = {
-        entity
-        for entity in missing_entities
-        if entity in TRANSACTION_ENTITIES
-    }
+    fatal_transaction_failures = len(mandatory_failed_entities)
 
     master_warning_count = (
         sum(
@@ -1150,7 +1266,7 @@ def main() -> int:
     if mandatory_failed_entities:
         error_parts.append(
             f"{len(mandatory_failed_entities)} transaction entity/entity(ies) "
-            f"failed for source date {expected_source}"
+            f"remain failed for source date {expected_source}"
         )
 
     if audit_errors:
@@ -1182,7 +1298,7 @@ def main() -> int:
     print(f"Processing date            : {processing_date}")
     print(f"Source date                : {expected_source}")
     print(f"Files discovered           : {len(results)}")
-    print(f"  Current input            : {incoming_eligible_count}")
+    print(f"  Incoming eligible        : {incoming_eligible_count}")
     print(f"  Failed retry             : {failed_eligible_count}")
     print(f"Files uploaded             : {success}")
     print(f"Files skipped              : {skipped}")
@@ -1190,10 +1306,41 @@ def main() -> int:
     print(f"Non-processed moved        : {non_processed_count}")
     print(f"Mandatory missing          : {len(fatal_missing_entities)}")
     print(f"Mandatory failed           : {len(mandatory_failed_entities)}")
+    print(
+        f"Mandatory satisfied        : "
+        f"{len(mandatory_entities & cumulative_successful_entities)}"
+        f"/{len(mandatory_entities)}"
+    )
     print(f"Master warnings            : {master_warning_count}")
     print(f"Records in uploaded files  : {uploaded_records}")
     print("Records rejected           : 0")
     print(f"Run status                 : {run_status}")
+
+    LOGGER.info(
+        "Ingestion completed | run_id=%s | processing_date=%s | "
+        "source_date=%s | status=%s | current_uploaded=%s | "
+        "current_skipped=%s | current_failed=%s | cumulative_satisfied=%s/%s | "
+        "cumulative_missing=%s | cumulative_failed=%s | records=%s",
+        run_id,
+        processing_date,
+        expected_source,
+        run_status,
+        success,
+        skipped,
+        failed,
+        len(mandatory_entities & cumulative_successful_entities),
+        len(mandatory_entities),
+        sorted(fatal_missing_entities),
+        sorted(mandatory_failed_entities),
+        uploaded_records,
+    )
+
+    if audit_errors:
+        LOGGER.error(
+            "Audit errors encountered | count=%s | errors=%s",
+            len(audit_errors),
+            audit_errors,
+        )
 
     return 1 if run_status != "SUCCESS" else 0
 

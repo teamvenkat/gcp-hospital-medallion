@@ -17,7 +17,7 @@ VALUES
     (
         'departments',
         'departments_',
-        TRUE,
+        FALSE,
         'CSV',
         'hospital_bronze_ven.departments',
         'department_id',
@@ -31,7 +31,7 @@ VALUES
     (
         'doctors',
         'doctors_',
-        TRUE,
+        FALSE,
         'CSV',
         'hospital_bronze_ven.doctors',
         'doctor_id',
