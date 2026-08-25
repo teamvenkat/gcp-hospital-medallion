@@ -534,11 +534,12 @@ scripts/
 │   ├── 02_configure_gcp.sh
 │   ├── 03_enable_apis.sh
 │   ├── 04_create_storage.sh
-│   └── 05_create_datasets.sh
-├── create_control_tables.sh
+│   ├── 05_create_datasets.sh
+│   ├── 06_create_control_tables.sh
+│   ├── 07_seed_file_ingestion_config.sh
+│   ├── 08_validate_control_layer.sh
+│   └── 09_setup_all.sh
 ├── create_bronze_tables.sh
-├── seed_file_ingestion_config.sh
-├── validate_control_layer.sh
 ├── upload_raw_files.sh
 └── inspect_practice_csvs.sh
 ```
