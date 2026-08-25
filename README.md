@@ -34,67 +34,67 @@ The emphasis is on **working deliverables and a realistic end-to-end flow**, rat
                     ┌─────────────────────────────┐
                     │       Source Systems        │
                     │                             │
-                    │ CSV / SFTP / DB Extracts   │
+                    │ CSV / SFTP / DB Extracts    │
                     └──────────────┬──────────────┘
                                    │
                                    ▼
                     ┌─────────────────────────────┐
-                    │        Local / Landing       │
-                    │       incoming/ files        │
+                    │        Local / Landing      │
+                    │       incoming/ files       │
                     └──────────────┬──────────────┘
                                    │
                                    ▼
                     ┌─────────────────────────────┐
-                    │      RAW INGESTION           │
-                    │                              │
-                    │ filename/date validation     │
-                    │ CSV validation               │
-                    │ checksum / idempotency       │
-                    │ retry / backfill              │
-                    │ control tables                │
+                    │      RAW INGESTION          │
+                    │                             │
+                    │ filename/date validation    │
+                    │ CSV validation              │
+                    │ checksum / idempotency      │
+                    │ retry / backfill            │
+                    │ control tables              │
                     └──────────────┬──────────────┘
                                    │
                                    ▼
               ┌────────────────────────────────────────────┐
-              │                  GCS RAW                    │
+              │                  GCS RAW                   │
               │        gs://.../raw_bq/                    │
               └────────────────────┬───────────────────────┘
                                    │
                                    ▼
               ┌────────────────────────────────────────────┐
-              │                 BRONZE                      │
+              │                 BRONZE                     │
               │       BigQuery / raw structured data       │
-              │                                             │
-              │ schema-aligned                              │
-              │ minimally transformed                        │
-              │ ingestion metadata                           │
+              │                                            │
+              │ schema-aligned                             │
+              │ minimally transformed                      │
+              │ ingestion metadata                         │
               └────────────────────┬───────────────────────┘
                                    │
                                    ▼
               ┌────────────────────────────────────────────┐
-              │                  SILVER                     │
-              │                                             │
+              │                  SILVER                    │
+              │                                            │
               │ cleansing                                  │
-              │ standardisation                             │
-              │ deduplication                               │
-              │ joins / business rules                      │
-              │ data quality                                │
+              │ standardisation                            │
+              │ deduplication                              │
+              │ joins / business rules                     │
+              │ data quality                               │
               └────────────────────┬───────────────────────┘
                                    │
                                    ▼
               ┌────────────────────────────────────────────┐
-              │                   GOLD                      │
-              │                                             │
-              │ dimensional / analytical models             │
-              │ hospital KPIs                               │
-              │ reporting-ready tables                      │
+              │                   GOLD                     │
+              │                                            │
+              │ dimensional / analytical models            │
+              │ hospital KPIs                              │
+              │ reporting-ready tables                     │
               └────────────────────┬───────────────────────┘
                                    │
                                    ▼
                     ┌─────────────────────────────┐
                     │       Looker Studio         │
                     │                             │
-                    │ dashboards / KPIs / trends │
+                    │ dashboards / KPIs / trends  │
                     └─────────────────────────────┘
 ```
 
