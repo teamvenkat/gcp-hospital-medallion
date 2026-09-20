@@ -38,5 +38,9 @@ Thumbs.db
 # Log files
 *.log
 
-# others
-terraform/
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
