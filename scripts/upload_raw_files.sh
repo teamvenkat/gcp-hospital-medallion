@@ -2,6 +2,24 @@
 
 set -e
 
+CONFIG_FILE="config/dev.env"
+
+if [[ ! -f "$CONFIG_FILE" ]]
+then
+    echo "ERROR: Configuration file not found: $CONFIG_FILE"
+    exit 1
+fi
+
+source "$CONFIG_FILE"
+
+: "${PROJECT_ID:?PROJECT_ID is not set}"
+: "${CONTROL_DATASET:?CONTROL_DATASET is not set}"
+: "${RAW_BUCKET:?RAW_BUCKET is not set}"
+
+export PROJECT_ID
+export CONTROL_DATASET
+export RAW_BUCKET
+
 PROCESSING_DATE=""
 
 while [[ $# -gt 0 ]]

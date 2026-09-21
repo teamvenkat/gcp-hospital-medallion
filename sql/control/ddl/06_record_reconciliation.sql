@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `project-5fbc8bf7-2dd6-4f0a-a5f.hospital_control.record_reconciliation`
+CREATE TABLE IF NOT EXISTS `${PROJECT_ID}.${CONTROL_DATASET}.record_reconciliation`
 (
     run_id STRING NOT NULL,
     batch_id STRING,

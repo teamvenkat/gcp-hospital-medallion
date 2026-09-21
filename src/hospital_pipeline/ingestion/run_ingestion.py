@@ -45,17 +45,19 @@ from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
+import os
+
 
 from google.cloud import bigquery, storage
 
-PROJECT_ID = "project-5fbc8bf7-2dd6-4f0a-a5f"
-CONTROL_DATASET = "hospital_control"
+PROJECT_ID = os.environ["PROJECT_ID"]
+CONTROL_DATASET = os.environ["CONTROL_DATASET"]
 CONFIG_TABLE = "file_ingestion_config"
 FILE_LOG_TABLE = "file_ingestion_log"
 PIPELINE_RUN_TABLE = "pipeline_run"
 VALIDATION_ERROR_TABLE = "validation_error_log"
 
-GCS_BUCKET = "gcp-hospital-medallion-data"
+GCS_BUCKET = os.environ["RAW_BUCKET"]
 GCS_PREFIX = "raw_bq"
 DEFAULT_INPUT_DIR = Path("data/raw_bq")
 INCOMING_DIR_NAME = "incoming"
