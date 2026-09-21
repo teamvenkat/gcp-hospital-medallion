@@ -4,8 +4,8 @@ variable "project_id" {
 }
 
 variable "region" {
-  type        = string
-  default     = "asia-south1"
+  type    = string
+  default = "asia-south1"
 }
 
 variable "state_bucket_name" {

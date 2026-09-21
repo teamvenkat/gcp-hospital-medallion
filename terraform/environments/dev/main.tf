@@ -41,3 +41,17 @@ module "bigquery" {
     }
   }
 }
+
+
+module "iam" {
+  source = "../../modules/iam"
+
+  project_id = var.project_id
+
+  ingestion_service_account_id = "hospital-ingestion-dev"
+  composer_service_account_id  = "hospital-composer-dev"
+
+  raw_bucket_name   = var.raw_bucket_name
+  bronze_dataset_id = "hospital_bronze_dev"
+}
+

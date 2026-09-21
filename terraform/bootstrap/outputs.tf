@@ -4,9 +4,9 @@ output "state_bucket_name" {
 }
 
 output "state_bucket_uri" {
-  value       = "gs://${google_storage_bucket.terraform_state.name}"
+  value = "gs://${google_storage_bucket.terraform_state.name}"
 }
 
 output "state_backend_prefix" {
-  value       = "terraform/state"
+  value = "terraform/state"
 }
